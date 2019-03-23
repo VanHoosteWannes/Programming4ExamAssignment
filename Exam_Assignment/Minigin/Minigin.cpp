@@ -10,7 +10,15 @@
 #include "TextObject.h"
 #include "GameObject.h"
 #include "Scene.h"
+#include "TransformComponent.h"
+#include "TextComponent.h"
+#include "TextureComponent.h"
+#include "SpriteComponent.h"
 
+#pragma warning(push)
+#pragma warning (disable:4201)
+#include <glm/vec3.hpp>
+#pragma warning(push)
 
 void dae::Minigin::Initialize()
 {
@@ -41,20 +49,40 @@ void dae::Minigin::Initialize()
 void dae::Minigin::LoadGame() const
 {
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
-
+	
 	auto go = std::make_shared<GameObject>();
-	go->SetTexture("background.jpg");
+	TextureComponent* texture = new TextureComponent{ "background.jpg" };
+	go->AddComponent(texture);
 	scene.Add(go);
 
 	go = std::make_shared<GameObject>();
-	go->SetTexture("logo.png");
-	go->SetPosition(216, 180);
+	TextureComponent* texture1 = new TextureComponent{ "logo.png" };
+	go->AddComponent(texture1);
+	go->GetTransform()->SetPosition(216, 180, 0);
+	scene.Add(go);
+	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+
+	go = std::make_shared<GameObject>();
+	SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
+	texture2->SetSpriteInfo(7, 7, 0, 5, 6, 3);
+	go->AddComponent(texture2);
+	go->GetTransform()->SetPosition(30, 240, 0);
 	scene.Add(go);
 
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	auto to = std::make_shared<TextObject>("Programming 4 Assignment", font);
-	to->SetPosition(80, 20);
-	scene.Add(to);
+	go = std::make_shared<GameObject>();
+	TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
+	go->AddComponent(text);
+	go->GetTransform()->SetPosition(80, 20, 0);
+	scene.Add(go);
+
+	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	go = std::make_shared<GameObject>();
+	TextComponent* text1 = new TextComponent{ "FPS:", font , glm::vec3{255,255,0} };
+	text1->setFPS(true);
+	go->AddComponent(text1);
+	go->GetTransform()->SetPosition(0, 0, 0);
+	scene.Add(go);
+
 }
 
 void dae::Minigin::Cleanup()
@@ -75,21 +103,23 @@ void dae::Minigin::Run()
 	LoadGame();
 
 	{
-		auto t = std::chrono::high_resolution_clock::now();
+		bool doContinue = true;
+		auto lastTime = std::chrono::high_resolution_clock::now();
+
 		auto& renderer = Renderer::GetInstance();
 		auto& sceneManager = SceneManager::GetInstance();
 		auto& input = InputManager::GetInstance();
 
-		bool doContinue = true;
 		while (doContinue)
 		{
+			auto currentTime = std::chrono::high_resolution_clock::now();
+			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 			doContinue = input.ProcessInput();
 
-			sceneManager.Update();
+			sceneManager.Update(deltaTime);
 			renderer.Render();
 
-			t += std::chrono::milliseconds(msPerFrame);
-			std::this_thread::sleep_until(t);
+			lastTime = currentTime;
 		}
 	}
 

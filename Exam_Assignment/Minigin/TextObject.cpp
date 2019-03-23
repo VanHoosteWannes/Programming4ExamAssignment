@@ -9,9 +9,9 @@
 
 dae::TextObject::TextObject(const std::string& text, std::shared_ptr<Font> font) 
 	: mNeedsUpdate(true), mText(text), mFont(font), mTexture(nullptr)
-{ }
+{}
 
-void dae::TextObject::Update()
+void dae::TextObject::Update(float deltaTime)
 {
 	if (mNeedsUpdate)
 	{
@@ -29,6 +29,7 @@ void dae::TextObject::Update()
 		SDL_FreeSurface(surf);
 		mTexture = std::make_shared<Texture2D>(texture);
 	}
+	UNREFERENCED_PARAMETER(deltaTime);
 }
 
 void dae::TextObject::Render() const
