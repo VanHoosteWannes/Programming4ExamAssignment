@@ -19,21 +19,17 @@ namespace dae
 		TextComponent& operator=(TextComponent&& other) noexcept = delete;
 		TextComponent(const std::string& text, std::shared_ptr<Font> font, glm::vec3 color);
 		virtual ~TextComponent() = default;
-
-		void setFPS(bool FPS);
+		void setText(std::string text);
+		void Initialize() override;
+		void Update(float deltaTime) override;
+		void Render() override;
+		void Render(glm::vec3 pos); //used by the FPSComponent
 	private:
-		float m_FpsUpdateDelay;
-		bool m_isFPS;
 		bool mNeedsUpdate;
 		std::string m_Text;
 		std::shared_ptr<Font> m_Font;
 		std::shared_ptr<Texture2D> m_Texture;
 		glm::vec3 m_Color;
-	protected:
-		void Initialize() override;
-		void Update(float deltaTime) override;
-		void Render() override;
-		
 	};
 }
 

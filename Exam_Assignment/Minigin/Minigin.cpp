@@ -14,6 +14,7 @@
 #include "TextComponent.h"
 #include "TextureComponent.h"
 #include "SpriteComponent.h"
+#include "FPSComponent.h"
 
 #pragma warning(push)
 #pragma warning (disable:4201)
@@ -77,9 +78,9 @@ void dae::Minigin::LoadGame() const
 
 	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	go = std::make_shared<GameObject>();
-	TextComponent* text1 = new TextComponent{ "FPS:", font , glm::vec3{255,255,0} };
-	text1->setFPS(true);
-	go->AddComponent(text1);
+	FPSComponent* comp = new FPSComponent{ font, glm::vec3{255,255,0} };
+	//text1->setFPS(true);
+	go->AddComponent(comp);
 	go->GetTransform()->SetPosition(0, 0, 0);
 	scene.Add(go);
 

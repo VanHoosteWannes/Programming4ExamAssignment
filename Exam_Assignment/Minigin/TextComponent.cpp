@@ -8,27 +8,18 @@
 #include "TransformComponent.h"
 
 dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font, glm::vec3 color = {255,255,255})
-	: mNeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr)
-,m_isFPS(false), m_FpsUpdateDelay(1.0f),  m_Color(color)
+	: mNeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr),  m_Color(color)
 {
 }
 
-void dae::TextComponent::setFPS(bool FPS) {
-	m_isFPS = FPS;
+void dae::TextComponent::setText(std::string text) {
+	m_Text = text;
 }
 
 void dae::TextComponent::Initialize() {}
 void dae::TextComponent::Update(float deltaTime) {
 	if (mNeedsUpdate)
 	{
-		if (m_isFPS) {
-		    m_FpsUpdateDelay -= deltaTime;
-			if (m_FpsUpdateDelay <= 0)
-			{
-				m_Text = "FPS: " + std::to_string(int(1.0f / deltaTime));
-				m_FpsUpdateDelay = 1.0f;
-			}
-		}
 		const SDL_Color color = {UINT8(m_Color.x), UINT8(m_Color.y), UINT8(m_Color.z) }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr)
@@ -49,6 +40,13 @@ void dae::TextComponent::Render() {
 	if (m_Texture != nullptr)
 	{
 		const auto pos = GetGameObject()->GetTransform()->GetPosition();
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	}
+}
+
+void dae::TextComponent::Render(glm::vec3 pos) {
+	if (m_Texture != nullptr)
+	{
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}
 }
