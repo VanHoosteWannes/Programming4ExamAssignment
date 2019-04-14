@@ -4,7 +4,7 @@
 #include "TransformComponent.h"
 
 dae::FPSComponent::FPSComponent(std::shared_ptr<Font> font, glm::vec3 color) {
-	m_TextComp = new TextComponent{ "FPS:", font, color };
+	m_TextComp = std::make_shared<TextComponent>( "FPS:", font, color);
 }
 
 void dae::FPSComponent::Initialize() {}

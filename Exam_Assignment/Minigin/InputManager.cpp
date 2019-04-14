@@ -26,17 +26,43 @@ bool dae::InputManager::ProcessInput()
 
 bool dae::InputManager::IsPressed(ControllerButton button) const
 {
-	switch (button)
-	{
-	case ControllerButton::ButtonA:
-		return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_A;
-	case ControllerButton::ButtonB:
-		return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_B;
-	case ControllerButton::ButtonX:
-		return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_X;
-	case ControllerButton::ButtonY:
-		return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
-	default: return false;
+	//switch (button)
+	//{
+	//case ControllerButton::ButtonA:
+	//	return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_A;
+	//case ControllerButton::ButtonB:
+	//	return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_B;
+	//case ControllerButton::ButtonX:
+	//	return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_X;
+	//case ControllerButton::ButtonY:
+	//	return currentState.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
+	//default: return false;
+	//}
+
+	bool is_button_pressed = ((currentState.Gamepad.wButtons & int(button)) != 0);
+
+	if (is_button_pressed) {
+		return true;
 	}
+	return false;
+}
+
+std::shared_ptr<dae::Command> dae::InputManager::HandleInput() {
+	if(IsPressed(ControllerButton::ButtonA)) {
+		return Shoot;
+	}
+	if(IsPressed(ControllerButton::ButtonRight)) {
+		return MoveRight;
+	}
+	if (IsPressed(ControllerButton::ButtonLeft)) {
+		return MoveLeft;
+	}
+	if (IsPressed(ControllerButton::ButtonUp)) {
+		return MoveUp;
+	}
+	if (IsPressed(ControllerButton::ButtonDown)) {
+		return MoveDown;
+	}
+	return nullptr;
 }
 

@@ -19,6 +19,7 @@ namespace dae
 		TransformComponent();
 
 		const glm::vec3& GetPosition() const { return m_Position; }
+		void Translate(float x, float y, float z);
 		void SetPosition(float x, float y, float z);
 	protected:
 		void Initialize() override;

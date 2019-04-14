@@ -7,14 +7,8 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "TextObject.h"
-#include "GameObject.h"
-#include "Scene.h"
-#include "TransformComponent.h"
-#include "TextComponent.h"
-#include "TextureComponent.h"
-#include "SpriteComponent.h"
-#include "FPSComponent.h"
+#include "StartScene.h"
+
 
 #pragma warning(push)
 #pragma warning (disable:4201)
@@ -49,40 +43,40 @@ void dae::Minigin::Initialize()
  */
 void dae::Minigin::LoadGame() const
 {
-	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
-	
-	auto go = std::make_shared<GameObject>();
-	TextureComponent* texture = new TextureComponent{ "background.jpg" };
-	go->AddComponent(texture);
-	scene.Add(go);
+	SceneManager::GetInstance().AddScene(std::make_shared<StartScene>());
 
-	go = std::make_shared<GameObject>();
-	TextureComponent* texture1 = new TextureComponent{ "logo.png" };
-	go->AddComponent(texture1);
-	go->GetTransform()->SetPosition(216, 180, 0);
-	scene.Add(go);
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+	SceneManager::GetInstance().Initialize();
+	//auto go = std::make_shared<GameObject>();
+	//TextureComponent* texture = new TextureComponent{ "background.jpg" };
+	//go->AddComponent(texture);
+	//scene.Add(go);
 
-	go = std::make_shared<GameObject>();
-	SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
-	texture2->SetSpriteInfo(7, 7, 0, 5, 6, 3);
-	go->AddComponent(texture2);
-	go->GetTransform()->SetPosition(30, 240, 0);
-	scene.Add(go);
+	//go = std::make_shared<GameObject>();
+	//TextureComponent* texture1 = new TextureComponent{ "logo.png" };
+	//go->AddComponent(texture1);
+	//go->GetTransform()->SetPosition(216, 180, 0);
+	//scene.Add(go);
+	//auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
-	go = std::make_shared<GameObject>();
-	TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
-	go->AddComponent(text);
-	go->GetTransform()->SetPosition(80, 20, 0);
-	scene.Add(go);
+	//go = std::make_shared<GameObject>();
+	//SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
+	//texture2->SetSpriteInfo(7, 7, 0, 5, 6, 3);
+	//go->AddComponent(texture2);
+	//go->GetTransform()->SetPosition(30, 240, 0);
+	//scene.Add(go);
 
-	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	go = std::make_shared<GameObject>();
-	FPSComponent* comp = new FPSComponent{ font, glm::vec3{255,255,0} };
-	//text1->setFPS(true);
-	go->AddComponent(comp);
-	go->GetTransform()->SetPosition(0, 0, 0);
-	scene.Add(go);
+	//go = std::make_shared<GameObject>();
+	//TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
+	//go->AddComponent(text);
+	//go->GetTransform()->SetPosition(80, 20, 0);
+	//scene.Add(go);
+	// 
+	//font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	//go = std::make_shared<GameObject>();
+	//FPSComponent* comp = new FPSComponent{ font, glm::vec3{255,255,0} };
+	//go->AddComponent(comp);
+	//go->GetTransform()->SetPosition(0, 0, 0);
+	//scene.Add(go);
 
 }
 

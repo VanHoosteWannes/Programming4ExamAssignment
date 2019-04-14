@@ -24,7 +24,7 @@ namespace dae
 		void Update(float deltaTime) override;
 		void Render() override;
 	private:
-		TextComponent* m_TextComp;
+		std::shared_ptr<TextComponent> m_TextComp;
 		float m_FpsUpdateDelay;
 		std::string m_Text;
 	};
