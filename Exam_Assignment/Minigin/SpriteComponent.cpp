@@ -21,20 +21,30 @@ dae::SpriteComponent::SpriteComponent(const std::string& filename, float width, 
 {
 }
 
+void dae::SpriteComponent::Render(glm::vec3 pos) {
+	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
+		SDL_Rect{ int((m_Width / m_Cols) * m_ActFrame), int(m_Height / m_Rows * m_YOffset), int(m_Width / m_Cols), int(m_Height / m_Rows) });
+}
+
 void dae::SpriteComponent::SetSpriteInfo(int rows, int cols, int xOffset1, int xOffset2, int yOffset, float scale) {
-	m_Rows = rows;
-	m_Cols = cols;
-	m_Xoffset1 = xOffset1;
-	m_ActFrame = xOffset1;
-	m_Xoffset2 = xOffset2;
-	m_YOffset = yOffset;
-	m_Scale = scale;
+	if(m_Rows == rows && m_Cols == cols && m_Xoffset1 == xOffset1 && m_Xoffset2 == xOffset2 && m_YOffset == yOffset && m_Scale == scale) {
+		//nothing happens
+	}
+	else {
+		m_Rows = rows;
+		m_Cols = cols;
+		m_Xoffset1 = xOffset1;
+		m_ActFrame = xOffset1;
+		m_Xoffset2 = xOffset2;
+		m_YOffset = yOffset;
+		m_Scale = scale;
+	}
 }
 
 void dae::SpriteComponent::Initialize() {}
 void dae::SpriteComponent::Render() {
 	auto pos = m_pGameObject->GetTransform()->GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2, pos.y - m_Height / m_Rows / 2, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
+	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
 		SDL_Rect{ int((m_Width / m_Cols) * m_ActFrame), int(m_Height / m_Rows * m_YOffset), int(m_Width / m_Cols), int(m_Height / m_Rows) });
 }
 void dae::SpriteComponent::Update(float deltaTime) {

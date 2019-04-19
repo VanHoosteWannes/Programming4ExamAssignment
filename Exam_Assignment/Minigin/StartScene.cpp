@@ -18,30 +18,30 @@ dae::StartScene::StartScene()
 void dae::StartScene::Initialize() {
 
 auto go = std::make_shared<GameObject>();
-TextureComponent* texture = new TextureComponent{ "background.jpg" };
+TextureComponent* texture = new TextureComponent{ "Level.png" };
 go->AddComponent(texture);
 Add(go);
 
-go = std::make_shared<GameObject>();
-TextureComponent* texture1 = new TextureComponent{ "logo.png" };
-go->AddComponent(texture1);
-go->GetTransform()->SetPosition(216, 180, 0);
-Add(go);
+//go = std::make_shared<GameObject>();
+//TextureComponent* texture1 = new TextureComponent{ "logo.png" };
+//go->AddComponent(texture1);
+//go->GetTransform()->SetPosition(216, 180, 0);
+//Add(go);
 auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
-SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
-MovementComponent* movement = new MovementComponent{ 0.2f };
-texture2->SetSpriteInfo(7, 7, 0, 5, 6, 3);
-m_Obj->AddComponent(texture2);
+//SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
+MovementComponent* movement = new MovementComponent{ 0.1f,448, 574 };
+//texture2->SetSpriteInfo(7, 7, 0, 2, 0, 2);
+//m_Obj->AddComponent(texture2);
 m_Obj->AddComponent(movement);
-m_Obj->GetTransform()->SetPosition(30, 240, 0);
+m_Obj->GetTransform()->SetPosition(45, 48, 0);
 Add(m_Obj);
 
-go = std::make_shared<GameObject>();
-TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
-go->AddComponent(text);
-go->GetTransform()->SetPosition(80, 20, 0);
-Add(go);
+//go = std::make_shared<GameObject>();
+//TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
+//go->AddComponent(text);
+//go->GetTransform()->SetPosition(80, 20, 0);
+//Add(go);
  
 font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 go = std::make_shared<GameObject>();
