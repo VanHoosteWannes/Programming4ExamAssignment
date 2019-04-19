@@ -34,6 +34,7 @@ dae::TextureComponent::TextureComponent(const std::string& filename, float width
 	
 }
 
+
 void dae::TextureComponent::Initialize() {}
 void dae::TextureComponent::Render() {
 	auto pos = m_pGameObject->GetTransform()->GetPosition();
@@ -45,6 +46,19 @@ void dae::TextureComponent::Render() {
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y, m_Width, m_Height);
 	}
 	else if(!m_IsWidthHeight) {
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
+	}
+}
+
+void dae::TextureComponent::Render(glm::vec3 pos) const{
+	if (m_IsSourceRect) {
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y, m_Width, m_Height, m_SourceRect);
+	}
+	else if (m_IsWidthHeight)
+	{
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y, m_Width, m_Height);
+	}
+	else if (!m_IsWidthHeight) {
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);
 	}
 }

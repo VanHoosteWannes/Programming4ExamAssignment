@@ -1,4 +1,30 @@
-﻿  MovementComponent.cpp
+﻿  MiniginPCH.cpp
+  Component.cpp
+  Font.cpp
+  FPSComponent.cpp
+  GameObject.cpp
+  InputManager.cpp
+  Log.cpp
+  Main.cpp
+  MapComponent.cpp
+  Minigin.cpp
+  MovementComponent.cpp
+  Renderer.cpp
+  ResourceManager.cpp
+  Scene.cpp
+  SceneManager.cpp
+  SpriteComponent.cpp
+  StartScene.cpp
+  TextComponent.cpp
+  TextObject.cpp
+  Texture2D.cpp
+  TextureComponent.cpp
+  Generating Code...
+  Compiling...
+  Transform.cpp
+  TransformComponent.cpp
+  Generating Code...
+     Creating library C:\Users\wanne\Desktop\DAE lessons\Year 2\Semester 2\Programming 4\Engine\Exam_Assignment\x64\Debug\Minigin.lib and object C:\Users\wanne\Desktop\DAE lessons\Year 2\Semester 2\Programming 4\Engine\Exam_Assignment\x64\Debug\Minigin.exp
   Minigin.vcxproj -> C:\Users\wanne\Desktop\DAE lessons\Year 2\Semester 2\Programming 4\Engine\Exam_Assignment\x64\Debug\Minigin.exe
   C:\Users\wanne\Desktop\DAE lessons\Year 2\Semester 2\Programming 4\Engine\Exam_Assignment\3rdParty\SDL2\lib\x64\SDL2.dll
   1 File(s) copied

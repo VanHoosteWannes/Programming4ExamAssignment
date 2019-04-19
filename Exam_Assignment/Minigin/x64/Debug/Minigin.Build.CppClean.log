@@ -2,7 +2,6 @@ c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_a
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\vc141.pdb
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\vc141.idb
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\miniginpch.obj
-c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\transform.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\texturecomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\texture2d.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\textobject.obj
@@ -15,6 +14,7 @@ c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_a
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\renderer.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\movementcomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\minigin.obj
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\mapcomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\main.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\log.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\inputmanager.obj
@@ -23,6 +23,7 @@ c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_a
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\font.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\component.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\transformcomponent.obj
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\minigin\x64\debug\transform.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\x64\debug\minigin.exe
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\x64\debug\minigin.ilk
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engine\exam_assignment\x64\debug\minigin.pdb

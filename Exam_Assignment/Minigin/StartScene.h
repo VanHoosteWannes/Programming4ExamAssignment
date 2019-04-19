@@ -20,6 +20,7 @@ namespace dae {
 		void Render() override;
 	private:
 		std::shared_ptr<GameObject> m_Obj;
+		std::shared_ptr<GameObject> m_Level;
 	};
 }
 

@@ -2,7 +2,7 @@
 #include "TransformComponent.h"
 
 dae::TransformComponent::TransformComponent()
-	:m_Position(0,0,0)
+	:m_Position(Vector3{ 0,0,0 })
 {
 }
 

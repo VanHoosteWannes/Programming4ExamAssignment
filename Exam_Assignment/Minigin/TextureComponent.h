@@ -2,6 +2,10 @@
 #include "Component.h"
 #include "Texture2D.h"
 #include <SDL.h>
+#pragma warning(push)
+#pragma warning (disable:4201)
+#include <glm/vec3.hpp>
+#pragma warning(push)
 
 namespace dae
 {
@@ -16,7 +20,7 @@ namespace dae
 		TextureComponent(const std::string& filename);
 		TextureComponent(const std::string& filename, float width, float height);
 		TextureComponent(const std::string& filename, float width, float height, SDL_Rect sourceRect);
-
+		void Render(glm::vec3 pos) const;
 	protected:
 		std::shared_ptr<Texture2D> m_Texture;
 		bool m_IsWidthHeight;

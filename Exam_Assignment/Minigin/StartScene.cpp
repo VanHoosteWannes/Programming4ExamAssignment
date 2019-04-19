@@ -8,11 +8,13 @@
 #include "FPSComponent.h"
 #include "TransformComponent.h"
 #include "InputManager.h"
+#include "MapComponent.h"
 
 dae::StartScene::StartScene()
 	:Scene("StartScene")
 {
 	m_Obj = std::make_shared<GameObject>();
+	m_Level = std::make_shared<GameObject>();
 }
 
 void dae::StartScene::Initialize() {
@@ -22,6 +24,10 @@ TextureComponent* texture = new TextureComponent{ "Level.png" };
 go->AddComponent(texture);
 Add(go);
 
+
+MapComponent* map = new MapComponent{ 15, 14};
+m_Level->AddComponent(map);
+Add(m_Level);
 //go = std::make_shared<GameObject>();
 //TextureComponent* texture1 = new TextureComponent{ "logo.png" };
 //go->AddComponent(texture1);
@@ -37,6 +43,7 @@ m_Obj->AddComponent(movement);
 m_Obj->GetTransform()->SetPosition(45, 48, 0);
 Add(m_Obj);
 
+map->AddDigger(m_Obj);
 //go = std::make_shared<GameObject>();
 //TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
 //go->AddComponent(text);
@@ -45,7 +52,7 @@ Add(m_Obj);
  
 font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 go = std::make_shared<GameObject>();
-FPSComponent* comp = new FPSComponent{ font, glm::vec3{255,255,0} };
+FPSComponent* comp = new FPSComponent{ font, Vector3{255,255,0} };
 go->AddComponent(comp);
 go->GetTransform()->SetPosition(0, 0, 0);
 Add(go);

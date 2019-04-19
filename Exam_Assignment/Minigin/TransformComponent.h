@@ -1,15 +1,12 @@
 #pragma once
 #include "Component.h"
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(push)
+#include "Vector3.h"
 
 namespace dae
 {
 	class TransformComponent final : public Component
 	{
-		glm::vec3 m_Position;
+		Vector3 m_Position;
 	public:
 		TransformComponent(const TransformComponent& other) = delete;
 		TransformComponent(TransformComponent&& other) noexcept = delete;
@@ -18,7 +15,7 @@ namespace dae
 		virtual ~TransformComponent() = default;
 		TransformComponent();
 
-		const glm::vec3& GetPosition() const { return m_Position; }
+		const Vector3& GetPosition() const { return m_Position; }
 		void Translate(float x, float y, float z);
 		void SetPosition(float x, float y, float z);
 	protected:

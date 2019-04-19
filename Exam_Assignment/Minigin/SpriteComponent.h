@@ -2,10 +2,7 @@
 #include "Component.h"
 #include <SDL.h>
 #include "Texture2D.h"
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(push)
+#include "Vector3.h"
 
 namespace dae
 {
@@ -18,7 +15,7 @@ namespace dae
 		SpriteComponent& operator=(SpriteComponent&& other) noexcept = delete;
 		virtual ~SpriteComponent() = default;
 		SpriteComponent(const std::string& filename, float width, float height);
-		void Render(glm::vec3 pos);
+		void Render(Vector3 pos);
 		void SetSpriteInfo(int rows, int cols, int xOffset1, int xOffset2, int yOffset, float scale);
 		void Update(float deltaTime) override;
 	protected:

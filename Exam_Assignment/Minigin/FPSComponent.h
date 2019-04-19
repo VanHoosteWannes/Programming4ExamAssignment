@@ -1,9 +1,6 @@
 #pragma once
 #include "Component.h"
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec3.hpp>
-#pragma warning(push)
+#include "Vector3.h"
 
 namespace dae
 {
@@ -17,7 +14,7 @@ namespace dae
 		FPSComponent(FPSComponent&& other) noexcept = delete;
 		FPSComponent& operator=(const FPSComponent& other) = delete;
 		FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
-		FPSComponent(std::shared_ptr<Font> font, glm::vec3 color);
+		FPSComponent(std::shared_ptr<Font> font, Vector3 color);
 		virtual ~FPSComponent() = default;
 	protected:
 		void Initialize() override;

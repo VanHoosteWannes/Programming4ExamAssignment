@@ -31,6 +31,15 @@ void dae::Renderer::Destroy()
 	}
 }
 
+void dae::Renderer::RenderQuad(float x, float y, float width, float height) const {
+	SDL_Rect dst;
+	dst.x = static_cast<int>(x);
+	dst.y = static_cast<int>(y);
+	dst.w = static_cast<int>(width);
+	dst.h = static_cast<int>(height);
+	SDL_RenderFillRect(GetSDLRenderer(), &dst);
+}
+
 void dae::Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
 {
 	SDL_Rect dst;

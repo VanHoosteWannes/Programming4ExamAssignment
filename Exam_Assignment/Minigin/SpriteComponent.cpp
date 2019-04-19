@@ -21,7 +21,7 @@ dae::SpriteComponent::SpriteComponent(const std::string& filename, float width, 
 {
 }
 
-void dae::SpriteComponent::Render(glm::vec3 pos) {
+void dae::SpriteComponent::Render(Vector3 pos) {
 	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
 		SDL_Rect{ int((m_Width / m_Cols) * m_ActFrame), int(m_Height / m_Rows * m_YOffset), int(m_Width / m_Cols), int(m_Height / m_Rows) });
 }

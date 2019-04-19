@@ -7,12 +7,12 @@
 #include "Texture2D.h"
 #include "TransformComponent.h"
 
-dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font, glm::vec3 color = {255,255,255})
+dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font, Vector3 color = {255,255,255})
 	: mNeedsUpdate(true), m_Text(text), m_Font(font), m_Texture(nullptr),  m_Color(color)
 {
 }
 
-void dae::TextComponent::setText(std::string text) {
+void dae::TextComponent::SetText(std::string text) {
 	m_Text = text;
 }
 
@@ -44,7 +44,7 @@ void dae::TextComponent::Render() {
 	}
 }
 
-void dae::TextComponent::Render(glm::vec3 pos) {
+void dae::TextComponent::Render(Vector3 pos) {
 	if (m_Texture != nullptr)
 	{
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y);

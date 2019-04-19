@@ -3,7 +3,7 @@
 #include "TextComponent.h"
 #include "TransformComponent.h"
 
-dae::FPSComponent::FPSComponent(std::shared_ptr<Font> font, glm::vec3 color) {
+dae::FPSComponent::FPSComponent(std::shared_ptr<Font> font, Vector3 color) {
 	m_TextComp = std::make_shared<TextComponent>( "FPS:", font, color);
 }
 
@@ -14,7 +14,7 @@ void dae::FPSComponent::Update(float deltaTime) {
 	if (m_FpsUpdateDelay <= 0)
 	{
 		m_Text = "FPS: " + std::to_string(int(1.0f / deltaTime));
-		m_TextComp->setText(m_Text);
+		m_TextComp->SetText(m_Text);
 		m_FpsUpdateDelay = 1.0f;
 		m_TextComp->Update(deltaTime);
 	}
