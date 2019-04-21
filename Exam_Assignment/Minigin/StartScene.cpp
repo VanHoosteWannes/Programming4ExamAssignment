@@ -9,6 +9,7 @@
 #include "TransformComponent.h"
 #include "InputManager.h"
 #include "MapComponent.h"
+#include "RockComponent.h"
 
 dae::StartScene::StartScene()
 	:Scene("StartScene")
@@ -44,6 +45,8 @@ m_Obj->GetTransform()->SetPosition(45, 48, 0);
 Add(m_Obj);
 
 map->AddDigger(m_Obj);
+//map->AddTunnel(2, 2, 4, true);
+//map->AddTunnel(5, 6, 3, false);
 //go = std::make_shared<GameObject>();
 //TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
 //go->AddComponent(text);

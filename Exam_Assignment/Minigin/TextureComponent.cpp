@@ -50,7 +50,7 @@ void dae::TextureComponent::Render() {
 	}
 }
 
-void dae::TextureComponent::Render(glm::vec3 pos) const{
+void dae::TextureComponent::Render(Vector3 pos) const{
 	if (m_IsSourceRect) {
 		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x, pos.y, m_Width, m_Height, m_SourceRect);
 	}
