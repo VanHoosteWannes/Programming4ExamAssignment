@@ -37,7 +37,7 @@ void dae::MapComponent::AddDigger(std::shared_ptr<GameObject> digger) {
 
 void dae::MapComponent::AddTunnel(int row, int col, int size, bool isHorizontal) {
 	if(isHorizontal) {
-		if (row * 14 + col + size <= m_Blocks.size())
+		if (row * 14 + col + size <= int(m_Blocks.size()))
 		{
 			for (int i{ 0 }; i < size; ++i) {
 				m_Blocks[row * 14 + col + i]->isPassed = true;
@@ -45,7 +45,7 @@ void dae::MapComponent::AddTunnel(int row, int col, int size, bool isHorizontal)
 		}
 	}
 	else {
-		if (row * 14 + col + (size * 14) <= m_Blocks.size())
+		if (row * 14 + col + (size * 14) <= int(m_Blocks.size()))
 		{
 			for (int i{ 0 }; i < size; ++i) {
 				m_Blocks[row * 14 + col + (i * 14)]->isPassed = true;

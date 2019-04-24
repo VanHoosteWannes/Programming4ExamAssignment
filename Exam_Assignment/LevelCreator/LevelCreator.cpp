@@ -13,7 +13,7 @@ int mapCols{};
 
 void AddTunnel(int col, int row, int size, bool isHorizontal) {
 	if (isHorizontal) {
-		if (row * mapCols + col + size <= m_Blocks.size())
+		if (row * mapCols + col + size <= int(m_Blocks.size()))
 		{
 			for (int i{ 0 }; i < size; ++i) {
 				m_Blocks[row * 14 + col + i] = true;
@@ -21,7 +21,7 @@ void AddTunnel(int col, int row, int size, bool isHorizontal) {
 		}
 	}
 	else {
-		if (row * mapCols + col + (size * mapCols) <= m_Blocks.size())
+		if (row * mapCols + col + (size * mapCols) <= int(m_Blocks.size()))
 		{
 			for (int i{ 0 }; i < size; ++i) {
 				m_Blocks[row * 14 + col + (i * 14)] = true;

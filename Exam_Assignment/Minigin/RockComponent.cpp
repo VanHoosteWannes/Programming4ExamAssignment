@@ -18,7 +18,7 @@ void dae::RockComponent::Update(float) {
 		m_CheckRest = false;
 	}
 	for (int i{ 1 }; i < 15; ++i) {
-		if (m_Index + (14 * i) <= m_Blocks.size()) {
+		if (m_Index + (14 * i) <= int(m_Blocks.size())) {
 			if (m_CheckRest) {
 				if (m_Blocks[m_Index + (14 * i)]->isPassed) {
 					m_EndPosition = m_Blocks[m_Index + (14 * i)]->position.y;

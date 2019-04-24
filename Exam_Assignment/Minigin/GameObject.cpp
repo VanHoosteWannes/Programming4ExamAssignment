@@ -11,7 +11,7 @@ dae::GameObject::GameObject()
 
 
 dae::GameObject::~GameObject() {
-	for(int i{}; i < m_pComponents.size(); ++i) {
+	for(unsigned int i{}; i < m_pComponents.size(); ++i) {
 		delete m_pComponents[i];
 	}
 }

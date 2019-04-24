@@ -17,7 +17,7 @@ public:
 	template<typename T>
 	T Read()
 	{
-		T value;
+		T value{};
 		if (m_Exists)
 		{
 			m_Reader.read((char*)&value, sizeof(T));
