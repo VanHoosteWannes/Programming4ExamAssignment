@@ -26,7 +26,7 @@ namespace dae
 		Scene& operator=(Scene&& other) = delete;
 	private: 
 
-		std::string m_Name{};
+		//std::string m_Name{};
 		std::vector < std::shared_ptr<SceneObject>> mObjects{};
 	};
 

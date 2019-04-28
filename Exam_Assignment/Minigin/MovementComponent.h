@@ -5,7 +5,7 @@
 namespace dae {
 
 	class SpriteComponent;
-	class MovementComponent :public Component
+	class MovementComponent final:public Component
 	{
 	public:
 		enum class Direction {

@@ -6,7 +6,7 @@
 
 namespace dae
 {
-	class TextureComponent : public Component
+	class TextureComponent final: public Component
 	{
 	public:
 		TextureComponent(const TextureComponent& other) = delete;
@@ -14,6 +14,7 @@ namespace dae
 		TextureComponent& operator=(const TextureComponent& other) = delete;
 		TextureComponent& operator=(TextureComponent&& other) noexcept = delete;
 		virtual ~TextureComponent() = default;
+		TextureComponent(const std::shared_ptr<Texture2D>& texture);
 		TextureComponent(const std::string& filename);
 		TextureComponent(const std::string& filename, float width, float height);
 		TextureComponent(const std::string& filename, float width, float height, SDL_Rect sourceRect);

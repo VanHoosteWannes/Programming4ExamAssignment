@@ -13,8 +13,7 @@ void dae::FPSComponent::Update(float deltaTime) {
 	m_FpsUpdateDelay -= deltaTime;
 	if (m_FpsUpdateDelay <= 0)
 	{
-		m_Text = "FPS: " + std::to_string(int(1.0f / deltaTime));
-		m_TextComp->SetText(m_Text);
+		m_TextComp->SetText("FPS: " + std::to_string(int(1.0f / deltaTime)));
 		m_FpsUpdateDelay = 1.0f;
 		m_TextComp->Update(deltaTime);
 	}

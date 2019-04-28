@@ -15,7 +15,7 @@ void dae::SceneManager::Render()
 	m_ActiveScene->RootRender();
 }
 
-void dae::SceneManager::AddScene(std::shared_ptr<Scene> pScene) {
+void dae::SceneManager::AddScene(const std::shared_ptr<Scene>& pScene) {
 	//only add if not in already
 	auto it = std::find(m_pScenes.begin(), m_pScenes.end(), pScene);
 
@@ -30,7 +30,7 @@ void dae::SceneManager::AddScene(std::shared_ptr<Scene> pScene) {
 	}
 }
 
-void dae::SceneManager::RemoveScene(std::shared_ptr<Scene> pScene) {
+void dae::SceneManager::RemoveScene(const std::shared_ptr<Scene>& pScene) {
 	auto it = find(m_pScenes.begin(), m_pScenes.end(), pScene);
 
 	if (it != m_pScenes.end())
@@ -45,8 +45,26 @@ void dae::SceneManager::NextScene() {
 		if (m_pScenes[i] == m_ActiveScene)
 		{
 			auto nextScene = ++i % m_pScenes.size();
-			m_NewActiveScene = m_pScenes[nextScene];
+			m_ActiveScene = m_pScenes[nextScene];
 			break;
+		}
+	}
+}
+
+void dae::SceneManager::PreviousScene() {
+	for (unsigned int i = 0; i < m_pScenes.size(); ++i)
+	{
+		if (m_pScenes[i] == m_ActiveScene)
+		{
+			if (m_pScenes[i] == m_ActiveScene)
+			{
+				if (i == 0)
+				{
+					i = unsigned int(m_pScenes.size() - 1);
+				}
+				m_ActiveScene = m_pScenes[i];
+				break;
+			}
 		}
 	}
 }

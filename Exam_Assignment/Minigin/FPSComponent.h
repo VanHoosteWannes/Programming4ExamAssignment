@@ -7,7 +7,7 @@ namespace dae
 	class TextComponent;
 	class Font;
 
-	class FPSComponent : public Component
+	class FPSComponent final: public Component
 	{
 	public:
 		FPSComponent(const FPSComponent& other) = delete;
@@ -23,6 +23,5 @@ namespace dae
 	private:
 		std::shared_ptr<TextComponent> m_TextComp;
 		float m_FpsUpdateDelay;
-		std::string m_Text;
 	};
 }

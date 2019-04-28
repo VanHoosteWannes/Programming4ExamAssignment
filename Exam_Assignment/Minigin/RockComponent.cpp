@@ -1,9 +1,11 @@
 #include "MiniginPCH.h"
 #include "RockComponent.h"
 #include "TransformComponent.h"
+#include "TextureComponent.h"
+#include "Block.h"
 
-dae::RockComponent::RockComponent(std::vector<std::shared_ptr<Block>> blocks, std::vector<std::shared_ptr<GameObject>> diggers, int row, int col) 
-:m_Blocks(blocks),m_Diggers(diggers),m_CheckRest(false),m_IsFalling(false) {
+dae::RockComponent::RockComponent(const std::vector<std::shared_ptr<Block>>& blocks, const std::vector<std::shared_ptr<GameObject>>& diggers, int row, int col) 
+:m_Blocks(std::move(blocks)),m_Diggers(std::move(diggers)),m_CheckRest(false),m_IsFalling(false) {
 	m_Texture = std::make_shared<TextureComponent>("rock.png");
 	m_Index = (row *  14) + col;
 	m_Position = Vector3{ col * 32.0f + 16, 80 + (row * 32.0f), 0 };

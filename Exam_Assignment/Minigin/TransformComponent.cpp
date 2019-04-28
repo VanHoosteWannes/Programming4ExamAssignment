@@ -19,8 +19,8 @@ void dae::TransformComponent::SetPosition(const float x, const float y, const fl
 }
 void dae::TransformComponent::Initialize() {
 }
-void dae::TransformComponent::Update(float deltaTime) {
-	UNREFERENCED_PARAMETER(deltaTime);
+void dae::TransformComponent::Update(float) {
+
 }
 void dae::TransformComponent::Render() {
 	

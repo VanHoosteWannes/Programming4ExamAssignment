@@ -1,7 +1,8 @@
 #pragma once
-
-struct Vector3 {
-	float x;
-	float y;
-	float z;
-};
+namespace dae {
+	struct Vector3 {
+		float x;
+		float y;
+		float z;
+	};
+}

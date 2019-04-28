@@ -10,9 +10,10 @@ namespace dae
 	public:
 		//scenemanager based on the overlord engine
 
-		void AddScene(std::shared_ptr<Scene> pScene);
-		void RemoveScene(std::shared_ptr<Scene> pScene);
+		void AddScene(const std::shared_ptr<Scene>& pScene);
+		void RemoveScene(const std::shared_ptr<Scene>& pScene);
 		void NextScene();
+		void PreviousScene();
 		std::shared_ptr<Scene> GetActiveScene() const { return m_ActiveScene; }
 
 

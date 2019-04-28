@@ -7,16 +7,17 @@ namespace dae
 	class Font;
 	class Texture2D;
 
-	class TextComponent : public Component
+	class TextComponent final: public Component
 	{
 	public:
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) noexcept = delete;
 		TextComponent& operator=(const TextComponent& other) = delete;
 		TextComponent& operator=(TextComponent&& other) noexcept = delete;
-		TextComponent(const std::string& text, std::shared_ptr<Font> font, Vector3 color);
+		TextComponent(const std::string& text, const std::shared_ptr<Font>& font, Vector3 color);
 		virtual ~TextComponent() = default;
-		void SetText(std::string text);
+		void SetText(const std::string& text);
+		void SetColor(Vector3 color);
 		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;

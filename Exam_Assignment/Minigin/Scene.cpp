@@ -20,7 +20,7 @@ void dae::Scene::RootRender() {
 	Render();
 }
 
-dae::Scene::Scene(const std::string& name) : m_Name(name) {}
+dae::Scene::Scene(const std::string&)/* : m_Name(name)*/ {}
 
 dae::Scene::~Scene() = default;
 

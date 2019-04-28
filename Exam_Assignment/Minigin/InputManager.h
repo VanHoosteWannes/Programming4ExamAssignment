@@ -17,21 +17,51 @@ namespace dae
 		ButtonDown = XINPUT_GAMEPAD_DPAD_DOWN
 	};
 
-	class InputManager final : public Singleton<InputManager>
-	{
+	class InputBase {
 	public:
-		bool ProcessInput();
-		bool IsPressed(ControllerButton button) const;
-		std::shared_ptr<Command> HandleInput();
+		virtual ~InputBase() = default;
+		virtual bool ProcessInput(int) = 0;
+		virtual bool IsPressed(const ControllerButton& button) const = 0;
+		virtual std::shared_ptr<Command> HandleInput() = 0 ;
+		virtual void SetCommandToButton(const std::shared_ptr<Command>& command, const ControllerButton& button) = 0;
+	};
+
+	class NullInput : public InputBase { //used to create empty input if gamemode is not coop or versus
+		bool ProcessInput(int) override{ return false; }
+		bool IsPressed(const ControllerButton&) const override { return false; }
+		std::shared_ptr<Command> HandleInput() override { return nullptr; }
+		void SetCommandToButton(const std::shared_ptr<Command>&, const ControllerButton&) override{};
+	};
+
+	class Input : public InputBase {
+	public:
+		bool ProcessInput(int i) override;
+		bool IsPressed(const ControllerButton& button) const override;
+		std::shared_ptr<Command> HandleInput() override;
+		void SetCommandToButton(const std::shared_ptr<Command>& command, const ControllerButton& button) override;
 	private:
 		XINPUT_STATE currentState{};
-		std::shared_ptr<ShootCommand> Shoot = std::make_shared<ShootCommand>();
-		std::shared_ptr<MoveRightCommand> MoveRight = std::make_shared<MoveRightCommand>();
-		std::shared_ptr<MoveLeftCommand> MoveLeft = std::make_shared<MoveLeftCommand>();
-		std::shared_ptr<MoveUpCommand> MoveUp = std::make_shared<MoveUpCommand>();
-		std::shared_ptr<MoveDownCommand> MoveDown = std::make_shared<MoveDownCommand>();
-
-		XINPUT_GAMEPAD controller{};
+		std::shared_ptr<Command> CommandA = std::make_shared<ShootCommand>();
+		std::shared_ptr<Command> CommandRight = std::make_shared<MoveRightCommand>();
+		std::shared_ptr<Command> CommandLeft = std::make_shared<MoveLeftCommand>();
+		std::shared_ptr<Command> CommandUp = std::make_shared<MoveUpCommand>();
+		std::shared_ptr<Command> CommandDown = std::make_shared<MoveDownCommand>();
 	};
+
+	//class InputManager final : public Singleton<InputManager>
+	//{
+	//public:
+	//	bool ProcessInput();
+	//	bool IsPressed(const ControllerButton& button) const;
+	//	std::shared_ptr<Command> HandleInput();
+	//	void SetCommandToButton(const std::shared_ptr<Command>& command, const ControllerButton& button);
+	//private:
+	//	XINPUT_STATE currentState{};
+	//	std::shared_ptr<Command> CommandA = std::make_shared<ShootCommand>();
+	//	std::shared_ptr<Command> CommandRight = std::make_shared<MoveRightCommand>();
+	//	std::shared_ptr<Command> CommandLeft = std::make_shared<MoveLeftCommand>();
+	//	std::shared_ptr<Command> CommandUp = std::make_shared<MoveUpCommand>();
+	//	std::shared_ptr<Command> CommandDown = std::make_shared<MoveDownCommand>();
+	//};
 
 }

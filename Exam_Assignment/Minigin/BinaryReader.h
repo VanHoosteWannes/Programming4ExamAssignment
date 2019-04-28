@@ -27,7 +27,6 @@ public:
 
 	std::string ReadString();
 	void CloseFile();
-	void ReadHex(std::vector<std::string> &hexVector);
 private:
 	bool m_Exists;
 	std::ifstream m_Reader;

@@ -34,6 +34,13 @@ dae::TextureComponent::TextureComponent(const std::string& filename, float width
 	
 }
 
+dae::TextureComponent::TextureComponent(const std::shared_ptr<Texture2D>& texture)
+	:m_Texture(std::move(texture))
+,m_IsWidthHeight(false)
+,m_IsSourceRect(false)
+{
+	
+}
 
 void dae::TextureComponent::Initialize() {}
 void dae::TextureComponent::Render() {

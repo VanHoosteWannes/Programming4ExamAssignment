@@ -1,12 +1,12 @@
 #pragma once
 #include "Component.h"
 #include <SDL.h>
-#include "Texture2D.h"
-#include "Vector3.h"
 
-namespace dae
-{
-	class SpriteComponent :public Component
+namespace dae{
+
+	class Texture2D;
+	struct Vector3;
+	class SpriteComponent final:public Component
 	{
 	public:
 		SpriteComponent(const SpriteComponent& other) = delete;

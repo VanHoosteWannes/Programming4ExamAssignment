@@ -1,13 +1,15 @@
 #pragma once
 #include "Component.h"
-#include "Block.h"
-#include "TextureComponent.h"
+#include "Vector3.h"
 
 namespace dae {
-	class RockComponent :public Component
+
+	struct Block;
+	class TextureComponent;
+	class RockComponent final:public Component
 	{
 	public:
-		RockComponent(std::vector<std::shared_ptr<Block>> blocks, std::vector<std::shared_ptr<GameObject>> diggers, int row, int col);
+		RockComponent(const std::vector<std::shared_ptr<Block>>& blocks, const std::vector<std::shared_ptr<GameObject>>& diggers, int row, int col);
 		virtual ~RockComponent() = default;
 		RockComponent(const RockComponent& other) = delete;
 		RockComponent(RockComponent&& other) noexcept = delete;

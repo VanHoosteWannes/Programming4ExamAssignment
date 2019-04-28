@@ -3,6 +3,9 @@
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "TransformComponent.h"
+#include "Vector3.h"
+#include "Texture2D.h"
+
 
 dae::SpriteComponent::SpriteComponent(const std::string& filename, float width, float height)
 	: m_Texture{ ResourceManager::GetInstance().LoadTexture(filename) }

@@ -2,6 +2,7 @@
 //#include <iostream>
 #include "GameObject.h"
 #include "MovementComponent.h"
+#include "ButtonComponent.h"
 
 namespace dae {
 	class Command
@@ -11,20 +12,20 @@ namespace dae {
 		virtual void Execute(std::shared_ptr<GameObject>& object) = 0;
 	};
 
-	class ShootCommand : public Command
+	class ShootCommand final: public Command
 	{
 	public:
 		void Shoot() {
 			std::cout << "You shot!\n";
 		};
-		virtual void Execute(std::shared_ptr<GameObject>&)
+		void Execute(std::shared_ptr<GameObject>&) override
 		{
 		}
 	};
 
-	class MoveRightCommand : public Command {
+	class MoveRightCommand final: public Command {
 	public:
-		virtual void Execute(std::shared_ptr<GameObject>& object)
+		void Execute(std::shared_ptr<GameObject>& object) override
 		{
 			if (object->HasComponent<MovementComponent>())
 			{
@@ -32,9 +33,9 @@ namespace dae {
 			}
 		}
 	};
-	class MoveLeftCommand : public Command {
+	class MoveLeftCommand final: public Command {
 	public:
-		virtual void Execute(std::shared_ptr<GameObject>& object)
+		void Execute(std::shared_ptr<GameObject>& object) override
 		{
 			if (object->HasComponent<MovementComponent>())
 			{
@@ -43,9 +44,9 @@ namespace dae {
 		}
 	};
 
-	class MoveUpCommand : public Command {
+	class MoveUpCommand final: public Command {
 	public:
-		virtual void Execute(std::shared_ptr<GameObject>& object)
+		void Execute(std::shared_ptr<GameObject>& object) override
 		{
 			if (object->HasComponent<MovementComponent>())
 			{
@@ -54,13 +55,22 @@ namespace dae {
 		}
 	};
 
-	class MoveDownCommand : public Command {
+	class MoveDownCommand final: public Command {
 	public:
-		virtual void Execute(std::shared_ptr<GameObject>& object)
+		void Execute(std::shared_ptr<GameObject>& object) override
 		{
 			if (object->HasComponent<MovementComponent>())
 			{
 				object->GetComponent<MovementComponent>()->MoveDown();
+			}
+		}
+	};
+
+	class ButtonActivateCommand final: public Command {
+	public:
+		void Execute(std::shared_ptr<GameObject>& object) override{
+			if(object->HasComponent<ButtonComponent>()) {
+				object->GetComponent<ButtonComponent>()->Activate();
 			}
 		}
 	};
