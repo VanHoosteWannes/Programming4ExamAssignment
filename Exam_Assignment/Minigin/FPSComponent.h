@@ -17,7 +17,6 @@ namespace dae
 		FPSComponent(std::shared_ptr<Font> font, Vector3 color);
 		virtual ~FPSComponent() = default;
 	protected:
-		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
 	private:

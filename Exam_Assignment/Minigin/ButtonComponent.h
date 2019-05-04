@@ -20,7 +20,6 @@ namespace dae {
 		void Unfocus();
 		void Activate();
 	protected:
-		void Initialize() override;
 		void Render() override;
 		void Update(float deltaTime) override;
 

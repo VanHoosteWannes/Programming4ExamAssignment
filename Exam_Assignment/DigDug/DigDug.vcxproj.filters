@@ -21,13 +21,16 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoopScene.h">
+    <ClInclude Include="Scenes\CoopScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SoloScene.h">
+    <ClInclude Include="Scenes\StartScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StartScene.h">
+    <ClInclude Include="Scenes\SoloScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugMapComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,13 +44,16 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CoopScene.cpp">
+    <ClCompile Include="Scenes\CoopScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoloScene.cpp">
+    <ClCompile Include="Scenes\SoloScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StartScene.cpp">
+    <ClCompile Include="Scenes\StartScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DigDugMapComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

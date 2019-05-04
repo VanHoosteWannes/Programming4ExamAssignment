@@ -7,8 +7,6 @@ dae::FPSComponent::FPSComponent(std::shared_ptr<Font> font, Vector3 color) {
 	m_TextComp = std::make_shared<TextComponent>( "FPS:", font, color);
 }
 
-void dae::FPSComponent::Initialize() {}
-
 void dae::FPSComponent::Update(float deltaTime) {
 	m_FpsUpdateDelay -= deltaTime;
 	if (m_FpsUpdateDelay <= 0)

@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 #include <algorithm>
+#include "InputManager.h"
 
 
 void dae::SceneManager::Update(float deltaTime)
@@ -46,6 +47,8 @@ void dae::SceneManager::NextScene() {
 		{
 			auto nextScene = ++i % m_pScenes.size();
 			m_ActiveScene = m_pScenes[nextScene];
+			InputManager::GetInstance().ClearAllActionsAndCommands();
+			m_ActiveScene->RootInitialize();
 			break;
 		}
 	}
@@ -56,21 +59,32 @@ void dae::SceneManager::PreviousScene() {
 	{
 		if (m_pScenes[i] == m_ActiveScene)
 		{
-			if (m_pScenes[i] == m_ActiveScene)
+			if (i == 0)
 			{
-				if (i == 0)
-				{
-					i = unsigned int(m_pScenes.size() - 1);
-				}
-				m_ActiveScene = m_pScenes[i];
-				break;
+				i = unsigned int(m_pScenes.size() - 1);
 			}
+			m_ActiveScene = m_pScenes[i];
+			InputManager::GetInstance().ClearAllActionsAndCommands();
+			m_ActiveScene->RootInitialize();
+			break;
+		}
+	}
+}
+
+void dae::SceneManager::SetActivateScene(const std::string& sceneName) {
+	for(auto element: m_pScenes) {
+		if(element->GetSceneName() == sceneName) {
+			m_ActiveScene = element;
+			InputManager::GetInstance().ClearAllActionsAndCommands();
+			m_ActiveScene->RootInitialize();
+			break;
 		}
 	}
 }
 
 void dae::SceneManager::Initialize() {
-	for(auto scenes: m_pScenes) {
-		scenes->RootInitialize();
-	}
+	//for(auto scenes: m_pScenes) {
+	//	scenes->RootInitialize();
+	//}
+	m_ActiveScene->RootInitialize();
 }

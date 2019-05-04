@@ -44,7 +44,6 @@ void dae::SpriteComponent::SetSpriteInfo(int rows, int cols, int xOffset1, int x
 	}
 }
 
-void dae::SpriteComponent::Initialize() {}
 void dae::SpriteComponent::Render() {
 	auto pos = m_pGameObject->GetTransform()->GetPosition();
 	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,

@@ -27,7 +27,6 @@ namespace dae
 		float m_Height;
 		float m_Width;
 
-		void Initialize() override;
 		void Render() override;
 		void Update(float deltaTime) override;
 	};

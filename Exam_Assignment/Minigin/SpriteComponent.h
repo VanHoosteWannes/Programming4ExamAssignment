@@ -33,7 +33,6 @@ namespace dae{
 		float m_FrameSec;
 		float m_AccuSet;
 
-		void Initialize() override;
 		void Render() override;
 	};
 }

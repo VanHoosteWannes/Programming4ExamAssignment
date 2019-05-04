@@ -18,7 +18,6 @@ namespace dae
 		virtual ~TextComponent() = default;
 		void SetText(const std::string& text);
 		void SetColor(Vector3 color);
-		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
 		void Render(Vector3 pos); //used by the FPSComponent

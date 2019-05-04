@@ -42,7 +42,6 @@ dae::TextureComponent::TextureComponent(const std::shared_ptr<Texture2D>& textur
 	
 }
 
-void dae::TextureComponent::Initialize() {}
 void dae::TextureComponent::Render() {
 	auto pos = m_pGameObject->GetTransform()->GetPosition();
 	if(m_IsSourceRect) {

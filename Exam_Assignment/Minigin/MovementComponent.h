@@ -14,7 +14,7 @@ namespace dae {
 			Up,
 			Down
 		};
-		MovementComponent(float speed, float maxWidth, float maxHeight);
+		MovementComponent(float speed, float minX, float minY, float maxX, float maxY, float textureOffset, float tileSize);
 		MovementComponent(const MovementComponent& other) = delete;
 		MovementComponent(MovementComponent&& other) noexcept = delete;
 		MovementComponent& operator=(const MovementComponent& other) = delete;
@@ -27,13 +27,16 @@ namespace dae {
 		void MoveLeft();
 
 	protected:
-		void Initialize() override;
 		void Render() override;
 		void Update(float deltaTime) override;
 
 		float m_Speed;
-		float m_MaxHeight;
-		float m_MaxWidth;
+		float m_MaxX;
+		float m_MaxY;
+		float m_MinX;
+		float m_MinY;
+		float m_TextureOffset;
+		float m_TileSize;
 		Direction m_CurrentDirection;
 		Direction m_PreviousDirection;
 		bool m_CanMoveUpDown;

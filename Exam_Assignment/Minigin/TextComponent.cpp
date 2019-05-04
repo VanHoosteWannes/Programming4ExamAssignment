@@ -19,9 +19,9 @@ void dae::TextComponent::SetText(const std::string& text) {
 
 void dae::TextComponent::SetColor(Vector3 color) {
 	m_Color = color;
+	mNeedsUpdate = true;
 }
 
-void dae::TextComponent::Initialize() {}
 void dae::TextComponent::Update(float) {
 	if (mNeedsUpdate)
 	{

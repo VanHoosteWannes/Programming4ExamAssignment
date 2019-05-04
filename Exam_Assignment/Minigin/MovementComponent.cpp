@@ -3,14 +3,18 @@
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
 
-dae::MovementComponent::MovementComponent(float speed, float maxWidth, float maxHeight)
+dae::MovementComponent::MovementComponent(float speed, float minX, float minY,float maxX, float maxY, float textureOffset, float tileSize)
 :m_Speed(speed)
-,m_MaxHeight(maxHeight)
-,m_MaxWidth(maxWidth)
+,m_MaxY(maxY)
+,m_MaxX(maxX)
+,m_MinX(minX)
+,m_MinY(minY)
 ,m_CurrentDirection(Direction::Right)
 ,m_PreviousDirection(Direction::Right)
 ,m_CanMoveUpDown(true)
 ,m_CanMoveLeftRight(true)
+,m_TextureOffset(textureOffset)
+,m_TileSize(tileSize)
 {
 	m_Sprite = std::make_shared<SpriteComponent>("CharacterSpriteSheet.png", 112.0f, 112.0f);
 	m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
@@ -23,7 +27,7 @@ void dae::MovementComponent::MoveUp() {
 	{
 		m_Sprite->SetSpriteInfo(7, 7, 0, 2, 5, 2);
 
-		if (m_pGameObject->GetTransform()->GetPosition().y + m_Speed >= 48)
+		if (m_pGameObject->GetTransform()->GetPosition().y + m_Speed >= m_MinY + m_TextureOffset)
 		{
 			m_pGameObject->GetTransform()->Translate(0, -m_Speed, 0);
 			m_CanMoveLeftRight = false;
@@ -37,7 +41,7 @@ void dae::MovementComponent::MoveDown(){
 	{
 		m_Sprite->SetSpriteInfo(7, 7, 0, 2, 3, 2);
 
-		if (m_pGameObject->GetTransform()->GetPosition().y - m_Speed <= m_MaxHeight - 48)
+		if (m_pGameObject->GetTransform()->GetPosition().y - m_Speed <= m_MaxY - m_TextureOffset)
 		{
 			m_pGameObject->GetTransform()->Translate(0, m_Speed, 0);
 			m_CanMoveLeftRight = false;
@@ -51,7 +55,7 @@ void dae::MovementComponent::MoveRight(){
 	{
 		m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
 
-		if (m_pGameObject->GetTransform()->GetPosition().x + m_Speed <= m_MaxWidth - 16)
+		if (m_pGameObject->GetTransform()->GetPosition().x + m_Speed <= m_MaxX - m_TextureOffset)
 		{
 			m_pGameObject->GetTransform()->Translate(m_Speed, 0, 0);
 			m_CanMoveUpDown = false;
@@ -65,7 +69,7 @@ void dae::MovementComponent::MoveLeft() {
 	{
 		m_Sprite->SetSpriteInfo(7, 7, 0, 2, 1, 2);
 
-		if (m_pGameObject->GetTransform()->GetPosition().x - m_Speed >= 16)
+		if (m_pGameObject->GetTransform()->GetPosition().x - m_Speed >= m_MinX + m_TextureOffset)
 		{
 			m_pGameObject->GetTransform()->Translate(-m_Speed, 0, 0);
 			m_CanMoveUpDown = false;
@@ -73,8 +77,6 @@ void dae::MovementComponent::MoveLeft() {
 	}
 }
 
-void dae::MovementComponent::Initialize() {
-}
 void dae::MovementComponent::Render() {
 	m_Sprite->Render(GetGameObject()->GetTransform()->GetPosition());
 }
@@ -111,76 +113,49 @@ void dae::MovementComponent::Update(float deltaTime) {
 		}
 	}
 
-	if(m_Corrections[0]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().x - 16) % 32 == 0) {
-			m_CanMoveUpDown = true;
-			m_Corrections[0] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(m_Speed, 0, 0);
-		}
-	}
-	else if(m_Corrections[1]){
-		if (int(m_pGameObject->GetTransform()->GetPosition().x - 16) % 32 == 0) {
-			m_CanMoveUpDown = true;
-			m_Corrections[1] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(-m_Speed, 0, 0);
-		}
-	}
-	else if (m_Corrections[2]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().x - 16) % 32 == 0) {
-			m_CanMoveUpDown = true;
-			m_Corrections[2] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(m_Speed, 0, 0);
-		}
-	}
-	else if (m_Corrections[3]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().x - 16) % 32 == 0) {
-			m_CanMoveUpDown = true;
-			m_Corrections[3] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(-m_Speed, 0, 0);
-		}
-	}
-	else if (m_Corrections[4]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().y - 16) % 32 == 0) {
-			m_CanMoveLeftRight = true;
-			m_Corrections[4] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(0, -m_Speed, 0);
-		}
-	}
-	else if (m_Corrections[5]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().y - 16) % 32 == 0) {
-			m_CanMoveLeftRight = true;
-			m_Corrections[5] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(0, m_Speed, 0);
-		}
-	}
-	else if (m_Corrections[6]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().y - 16) % 32 == 0) {
-			m_CanMoveLeftRight = true;
-			m_Corrections[6] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(0, -m_Speed, 0);
-		}
-	}
-	else if (m_Corrections[7]) {
-		if (int(m_pGameObject->GetTransform()->GetPosition().y - 16) % 32 == 0) {
-			m_CanMoveLeftRight = true;
-			m_Corrections[7] = false;
-		}
-		else {
-			m_pGameObject->GetTransform()->Translate(0, m_Speed, 0);
+	for(int i{}; i < 8; ++i) {
+		if (m_Corrections[i])
+		{
+			if (i < 4) {
+				if (i % 2 == 0) {
+					if (int(m_pGameObject->GetTransform()->GetPosition().x - m_TextureOffset) % int(m_TileSize) == 0) {
+						m_CanMoveUpDown = true;
+						m_Corrections[i] = false;
+					}
+					else {
+						m_pGameObject->GetTransform()->Translate(m_Speed, 0, 0);
+					}
+				}
+				else if (i % 2 == 1) {
+					if (int(m_pGameObject->GetTransform()->GetPosition().x - m_TextureOffset) % int(m_TileSize) == 0) {
+						m_CanMoveUpDown = true;
+						m_Corrections[i] = false;
+					}
+					else {
+						m_pGameObject->GetTransform()->Translate(-m_Speed, 0, 0);
+					}
+				}
+			}
+			else {
+				if (i % 2 == 0) {
+					if (int(m_pGameObject->GetTransform()->GetPosition().y - m_TextureOffset) % int(m_TileSize) == 0) {
+						m_CanMoveLeftRight = true;
+						m_Corrections[i] = false;
+					}
+					else {
+						m_pGameObject->GetTransform()->Translate(0, -m_Speed, 0);
+					}
+				}
+				else if (i % 2 == 1) {
+					if (int(m_pGameObject->GetTransform()->GetPosition().y - m_TextureOffset) % int(m_TileSize) == 0) {
+						m_CanMoveLeftRight = true;
+						m_Corrections[i] = false;
+					}
+					else {
+						m_pGameObject->GetTransform()->Translate(0, m_Speed, 0);
+					}
+				}
+			}
 		}
 	}
 }

@@ -20,6 +20,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#pragma comment(lib, "SDL2_mixer.lib")  
+#include <SDL_mixer.h>
 //#include "Log.h" // Various logging functions
 
 #endif //PCH_H

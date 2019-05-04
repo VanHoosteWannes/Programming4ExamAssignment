@@ -15,7 +15,7 @@ namespace dae
 		void NextScene();
 		void PreviousScene();
 		std::shared_ptr<Scene> GetActiveScene() const { return m_ActiveScene; }
-
+		void SetActivateScene(const std::string& sceneName);
 
 		void Initialize();
 		void Update(float deltaTime);

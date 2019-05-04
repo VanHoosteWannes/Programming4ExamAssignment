@@ -7,10 +7,10 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "StartScene.h"
-#include "SoloScene.h"
+#include "Scenes/StartScene.h"
+#include "Scenes/SoloScene.h"
 #include "Locator.h"
-#include "CoopScene.h"
+#include "Scenes/CoopScene.h"
 #include <stdexcept>
 
 #pragma warning(push)
@@ -39,6 +39,14 @@ void dae::Game::Initialize()
 	}
 
 	Renderer::GetInstance().Init(window);
+
+	//open audio from sdl_mixer
+	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) == -1)
+	{
+		//std::string errorMsg = "Failed to open audio:" + Mix_GetError();
+		std::string errorMsg = Mix_GetError();
+		throw std::runtime_error(errorMsg);
+	}
 }
 
 /**
@@ -46,8 +54,9 @@ void dae::Game::Initialize()
  */
 void dae::Game::LoadGame() const
 {
-	std::shared_ptr<Input> m_Player1 = std::make_shared<Input>();
-	Locator::ProvidePlayerOneInput(m_Player1);
+	InputManager::GetInstance().Initialize();
+	//std::shared_ptr<Input> m_Player1 = std::make_shared<Input>();
+	//Locator::ProvidePlayerOneInput(m_Player1);
 
 	SceneManager::GetInstance().AddScene(std::make_shared<StartScene>());
 	SceneManager::GetInstance().AddScene(std::make_shared<SoloScene>());
@@ -80,21 +89,21 @@ void dae::Game::Run()
 
 		auto& renderer = Renderer::GetInstance();
 		auto& sceneManager = SceneManager::GetInstance();
-		auto& input1 = Locator::GetPlayerOneInput();
-		auto& input2 = Locator::GetPlayerTwoInput();
-		//auto& input = InputManager::GetInstance();
+		//auto& input1 = Locator::GetPlayerOneInput();
+		//auto& input2 = Locator::GetPlayerTwoInput();
+		auto& input = InputManager::GetInstance();
 
 		while (doContinue)
 		{
 			auto currentTime = std::chrono::high_resolution_clock::now();
 			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
-			//doContinue = input.ProcessInput();
-			if (input1 != nullptr) {
+			doContinue = input.ProcessInput();
+		/*	if (input1 != nullptr) {
 				doContinue = input1->ProcessInput(0);
 			}
 			if (input2 != nullptr) {
 				input2->ProcessInput(1);
-			}
+			}*/
 
 			sceneManager.Update(deltaTime);
 			renderer.Render();

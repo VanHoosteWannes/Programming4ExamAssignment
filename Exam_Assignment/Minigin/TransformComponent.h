@@ -19,7 +19,6 @@ namespace dae
 		void Translate(float x, float y, float z);
 		void SetPosition(float x, float y, float z);
 	protected:
-		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
 	};

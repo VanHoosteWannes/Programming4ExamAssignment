@@ -7,7 +7,7 @@
 dae::ButtonComponent::ButtonComponent(const std::string& text, const std::shared_ptr<Font>& font, Vector3 color, void(*f)(), Vector3 position)
 	:m_Function(f)
     ,m_Position(position)
-	, m_FocusColor(Vector3{ 1.0f,1.0f,1.0f })
+	, m_FocusColor(Vector3{ 255.0f,255.0f,255.0f })
     ,m_NormalColor(color)
 {
 	m_Text = std::make_shared<TextComponent>(std::move(text), font,color);
@@ -24,8 +24,7 @@ void dae::ButtonComponent::Unfocus() {
 void dae::ButtonComponent::Activate() {
 	m_Function();
 }
-void dae::ButtonComponent::Initialize() {
-}
+
 void dae::ButtonComponent::Render() {
 	m_Text->Render(m_Position);
 }

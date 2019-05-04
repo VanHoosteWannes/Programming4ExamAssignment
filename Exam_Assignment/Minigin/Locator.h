@@ -4,7 +4,7 @@
 namespace dae {
 	class Locator //class based off Week7 locator
 	{
-	public:
+	/*public:
 		static void Initialize() { m_Input1 = m_NullInput; m_Input2 = m_NullInput; }
 
 		static std::shared_ptr<InputBase>& GetPlayerOneInput() { return m_Input1; }
@@ -31,12 +31,12 @@ namespace dae {
 			{
 				m_Input2 = service;
 			}
-		}
+		}*/
 
 	private:
-		static std::shared_ptr<InputBase> m_Input1;
-		static std::shared_ptr<InputBase> m_Input2;
-		static std::shared_ptr<NullInput> m_NullInput;
+		//static std::shared_ptr<InputBase> m_Input1;
+		//static std::shared_ptr<InputBase> m_Input2;
+		///static std::shared_ptr<NullInput> m_NullInput;
 	};
 }
 

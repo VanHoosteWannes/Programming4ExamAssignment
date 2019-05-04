@@ -17,8 +17,7 @@ void dae::TransformComponent::SetPosition(const float x, const float y, const fl
 	m_Position.y = y;
 	m_Position.z = z;
 }
-void dae::TransformComponent::Initialize() {
-}
+
 void dae::TransformComponent::Update(float) {
 
 }
