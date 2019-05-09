@@ -29,7 +29,7 @@ void dae::MapComponent::AddDigger(const std::shared_ptr<GameObject>& digger) {
 void dae::MapComponent::Update(float) {
 
 	//for every digger, if digger passes a block set it on passed
-	for (int j{}; j < m_Diggers.size(); ++j)
+	for (unsigned int j{}; j < m_Diggers.size(); ++j)
 	{
 		for (int i{}; i < m_Cols * m_Rows; ++i) {
 			if (int(m_Diggers[j]->GetTransform()->GetPosition().x) == m_Blocks[i]->position.x && int(m_Diggers[j]->GetTransform()->GetPosition().y) == m_Blocks[i]->position.y) {

@@ -11,6 +11,8 @@
 #include "MapComponent.h"
 #include "Locator.h"
 #include "../DigDugMapComponent.h"
+#include "../InputCommands.h"
+#include "../DigDugHealthComponent.h"
 
 dae::CoopScene::CoopScene()
 	:Scene("CoopScene") {
@@ -42,21 +44,29 @@ void dae::CoopScene::Initialize() {
 	std::shared_ptr<MoveDownCommand> down = std::make_shared<MoveDownCommand>();
 	input.SetCommand(3, down);
 
-	input.AddInputAction(InputAction{ 4,KeyState::Down, VK_LEFT, XINPUT_GAMEPAD_DPAD_LEFT, GamepadIndex::PlayerTwo });
+	input.AddInputAction(InputAction{ 4,KeyState::Down, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	std::shared_ptr<ShootCommand> shoot = std::make_shared<ShootCommand>();
+	input.SetCommand(4, shoot);
+
+	input.AddInputAction(InputAction{ 5,KeyState::Down, VK_LEFT, XINPUT_GAMEPAD_DPAD_LEFT, GamepadIndex::PlayerTwo });
 	left = std::make_shared<MoveLeftCommand>();
-	input.SetCommand(4, left);
+	input.SetCommand(5, left);
 
-	input.AddInputAction(InputAction{ 5,KeyState::Down, VK_RIGHT, XINPUT_GAMEPAD_DPAD_RIGHT, GamepadIndex::PlayerTwo });
+	input.AddInputAction(InputAction{ 6,KeyState::Down, VK_RIGHT, XINPUT_GAMEPAD_DPAD_RIGHT, GamepadIndex::PlayerTwo });
 	right = std::make_shared<MoveRightCommand>();
-	input.SetCommand(5, right);
+	input.SetCommand(6, right);
 
-	input.AddInputAction(InputAction{ 6,KeyState::Down, VK_UP, XINPUT_GAMEPAD_DPAD_UP, GamepadIndex::PlayerTwo });
+	input.AddInputAction(InputAction{ 7,KeyState::Down, VK_UP, XINPUT_GAMEPAD_DPAD_UP, GamepadIndex::PlayerTwo });
 	up = std::make_shared<MoveUpCommand>();
-	input.SetCommand(6, up);
+	input.SetCommand(7, up);
 
-	input.AddInputAction(InputAction{ 7,KeyState::Down, VK_DOWN, XINPUT_GAMEPAD_DPAD_DOWN, GamepadIndex::PlayerTwo });
+	input.AddInputAction(InputAction{ 8,KeyState::Down, VK_DOWN, XINPUT_GAMEPAD_DPAD_DOWN, GamepadIndex::PlayerTwo });
 	down = std::make_shared<MoveDownCommand>();
-	input.SetCommand(7, down);
+	input.SetCommand(8, down);
+
+	input.AddInputAction(InputAction{ 9,KeyState::Down, VK_SHIFT, XINPUT_GAMEPAD_A, GamepadIndex::PlayerTwo });
+	shoot = std::make_shared<ShootCommand>();
+	input.SetCommand(9, shoot);
 
 	auto go = std::make_shared<GameObject>();
 	TextureComponent* texture = new TextureComponent{ "Level.png" };
@@ -68,17 +78,23 @@ void dae::CoopScene::Initialize() {
 	m_Level->AddComponent(map);
 	Add(m_Level);
 
-	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-
 
 	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32 };
 	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542, 16,32 };
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
+	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{200,544,0}, "LifeP1.png" };
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
+	DigDugWeaponComponent* weapon2 = new DigDugWeaponComponent{ "Weapon.png" };
 
 	m_Obj->AddComponent(movement);
+	m_Obj->AddComponent(health);
+	m_Obj->AddComponent(weapon);
 	m_Obj->GetTransform()->SetPosition(45, 48, 0);
 	Add(m_Obj);
 
 	m_Obj2->AddComponent(movement2);
+	m_Obj2->AddComponent(health2);
+	m_Obj2->AddComponent(weapon2);
 	m_Obj2->GetTransform()->SetPosition(345, 48, 0);
 	Add(m_Obj2);
 
@@ -86,7 +102,7 @@ void dae::CoopScene::Initialize() {
 	map->AddDigger(m_Obj2);
 
 
-	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	go = std::make_shared<GameObject>();
 	FPSComponent* comp = new FPSComponent{ font, Vector3{255,255,0} };
 	go->AddComponent(comp);
@@ -98,29 +114,16 @@ void dae::CoopScene::Initialize() {
 void dae::CoopScene::Update(float) {
 	auto& input = InputManager::GetInstance();
 
-	if(input.IsActionTriggered(0)) {
-		input.GetCommand(0)->Execute(m_Obj);
+	for (int i{}; i < 5; ++i)
+	{
+		if (input.IsActionTriggered(i)) {
+			input.GetCommand(i)->Execute(m_Obj);
+		}
 	}
-	if (input.IsActionTriggered(1)) {
-		input.GetCommand(1)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(2)) {
-		input.GetCommand(2)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(3)) {
-		input.GetCommand(3)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(4)) {
-		input.GetCommand(4)->Execute(m_Obj2);
-	}
-	if (input.IsActionTriggered(5)) {
-		input.GetCommand(5)->Execute(m_Obj2);
-	}
-	if (input.IsActionTriggered(6)) {
-		input.GetCommand(6)->Execute(m_Obj2);
-	}
-	if (input.IsActionTriggered(7)) {
-		input.GetCommand(7)->Execute(m_Obj2);
+	for(int i{5}; i < 10; ++i) {
+		if (input.IsActionTriggered(i)) {
+			input.GetCommand(i)->Execute(m_Obj2);
+		}
 	}
 }
 

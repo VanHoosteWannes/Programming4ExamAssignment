@@ -22,7 +22,7 @@ dae::DigDugMapComponent::DigDugMapComponent(int rows, int cols, float tileSize, 
 }
 
 void dae::DigDugMapComponent::Update(float deltaTime) {
-	for (int j{}; j < m_Diggers.size(); ++j)
+	for (unsigned int j{}; j < m_Diggers.size(); ++j)
 	{
 		for (int i{}; i < m_Cols * m_Rows; ++i) {
 			if (int(m_Diggers[j]->GetTransform()->GetPosition().x) == m_Blocks[i]->position.x && int(m_Diggers[j]->GetTransform()->GetPosition().y) == m_Blocks[i]->position.y) {

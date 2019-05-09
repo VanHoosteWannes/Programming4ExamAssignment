@@ -1,7 +1,7 @@
 #include "MiniginPCH.h"
 #include "Locator.h"
 
-//std::shared_ptr<dae::InputBase> dae::Locator::m_Input1;
-//std::shared_ptr<dae::InputBase> dae::Locator::m_Input2;
-//std::shared_ptr<dae::NullInput> dae::Locator::m_NullInput;
+std::shared_ptr<dae::GameObject> dae::Locator::m_Player1;
+std::shared_ptr<dae::GameObject> dae::Locator::m_Player2;
+std::shared_ptr<dae::GameObject> dae::Locator::m_NullGameObject = std::make_shared<GameObject>();
 

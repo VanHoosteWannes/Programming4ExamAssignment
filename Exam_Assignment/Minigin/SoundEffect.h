@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+//class based off first year sound class
 namespace dae{
 class SoundEffect
 {
@@ -15,11 +16,6 @@ public:
 	bool IsLoaded( ) const;
 	bool Play( int loops );
 	void SetVolume( int value ); 
-	int GetVolume( ) const; 
-	static void StopAll( );
-	static void PauseAll( );
-	static void ResumeAll( );
-
 private:
 	Mix_Chunk* m_pMixChunk;
 };

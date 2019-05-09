@@ -50,6 +50,7 @@ namespace dae
 		class InputManager final : public Singleton<InputManager>
 		{
 		public:
+			~InputManager();
 			void ClearAllActionsAndCommands();
 			void Initialize();
 			void Update();

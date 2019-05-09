@@ -20,6 +20,10 @@ dae::MovementComponent::MovementComponent(float speed, float minX, float minY,fl
 	m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
 }
 
+dae::MovementComponent::Direction dae::MovementComponent::GetDirection() {
+	return m_CurrentDirection;
+}
+
 void dae::MovementComponent::MoveUp() {
 	m_PreviousDirection = m_CurrentDirection;
 	m_CurrentDirection = Direction::Up;

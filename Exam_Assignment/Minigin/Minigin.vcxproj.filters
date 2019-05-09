@@ -16,7 +16,7 @@
     <Filter Include="Components">
       <UniqueIdentifier>{2b2ba13e-0149-4798-abee-287aa2145731}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers">
+    <Filter Include="Header Files\Managers">
       <UniqueIdentifier>{ef170c11-87fe-429c-9858-34ff716d308d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -88,16 +88,16 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="ButtonManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Header Files</Filter>
@@ -108,11 +108,11 @@
     <ClInclude Include="SoundEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SoundStream.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FallingComponent..h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,16 +165,16 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="ButtonManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
@@ -185,11 +185,11 @@
     <ClCompile Include="SoundEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoundStream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FallingComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

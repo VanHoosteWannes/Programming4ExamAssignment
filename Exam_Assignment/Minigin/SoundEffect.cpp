@@ -2,6 +2,7 @@
 #include "SoundEffect.h"
 #include <iostream>
 
+//class based off first year sound class
 dae::SoundEffect::SoundEffect( std::string path )
 	:m_pMixChunk{ Mix_LoadWAV( path.c_str( ) ) }
 {
@@ -50,32 +51,6 @@ void dae::SoundEffect::SetVolume( int value )
 	{
 		Mix_VolumeChunk( m_pMixChunk, value );
 	}
-}
-
-int dae::SoundEffect::GetVolume( ) const
-{
-	if ( m_pMixChunk != nullptr )
-	{
-		return Mix_VolumeChunk( m_pMixChunk, -1 );
-	}
-	else
-	{
-		return -1;
-	}
-}
-
-void dae::SoundEffect::StopAll( )
-{
-	Mix_HaltChannel(-1 );
-}
-
-void dae::SoundEffect::PauseAll( )
-{
-	Mix_Pause( -1 );
-}
-void dae::SoundEffect::ResumeAll( )
-{
-	Mix_Resume( -1 );
 }
 
 

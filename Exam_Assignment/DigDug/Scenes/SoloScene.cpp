@@ -11,6 +11,9 @@
 #include "MapComponent.h"
 #include "Locator.h"
 #include "../DigDugMapComponent.h"
+#include "../InputCommands.h"
+#include "../DigDugHealthComponent.h"
+#include "../DigDugWeaponComponent.h"
 
 dae::SoloScene::SoloScene()
 	:Scene("SoloScene") {
@@ -39,6 +42,11 @@ void dae::SoloScene::Initialize() {
 	input.SetCommand(3, down);
 
 
+	input.AddInputAction(InputAction{ 4,KeyState::Down, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	std::shared_ptr<ShootCommand> shoot = std::make_shared<ShootCommand>();
+	input.SetCommand(4, shoot);
+
+
 	//std::shared_ptr<Input> m_Player2 = std::make_shared<Input>();
 	//Locator::ProvidePlayerTwoInput(m_Player2);
 
@@ -48,31 +56,24 @@ void dae::SoloScene::Initialize() {
 	Add(go);
 
 
-	//MapComponent* map = new MapComponent{ 15, 14,32, 0,64,16 };
 	DigDugMapComponent* map = new DigDugMapComponent{ 15,14,32,0,64,16 };
 	m_Level->AddComponent(map);
 	Add(m_Level);
-	//go = std::make_shared<GameObject>();
-	//TextureComponent* texture1 = new TextureComponent{ "logo.png" };
-	//go->AddComponent(texture1);
-	//go->GetTransform()->SetPosition(216, 180, 0);
-	//Add(go);
+
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
-	//SpriteComponent* texture2 = new SpriteComponent{ "CharacterSpriteSheet.png",112,112 };
+
 	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32 };
-	//texture2->SetSpriteInfo(7, 7, 0, 2, 0, 2);
-	//m_Obj->AddComponent(texture2);
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
+
 	m_Obj->AddComponent(movement);
+	m_Obj->AddComponent(health);
+	m_Obj->AddComponent(weapon);
 	m_Obj->GetTransform()->SetPosition(48, 48, 0);
 	Add(m_Obj);
 
 	map->AddDigger(m_Obj);
-	/*go = std::make_shared<GameObject>();
-	TextComponent* text = new TextComponent{ "Programming 4 Assignment", font, glm::vec3{255,255,255} };
-	go->AddComponent(text);
-	go->GetTransform()->SetPosition(80, 20, 0);
-	Add(go)*/;
 
 	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	go = std::make_shared<GameObject>();
@@ -85,22 +86,12 @@ void dae::SoloScene::Initialize() {
 
 void dae::SoloScene::Update(float) {
 	auto& input = InputManager::GetInstance();
-	//auto& input = Locator::GetPlayerOneInput();
-	//if (input->HandleInput() != nullptr) {
-	//	input->HandleInput()->Execute(m_Obj);
-	//}
 
-	if (input.IsActionTriggered(0)) {
-		input.GetCommand(0)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(1)) {
-		input.GetCommand(1)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(2)) {
-		input.GetCommand(2)->Execute(m_Obj);
-	}
-	if (input.IsActionTriggered(3)) {
-		input.GetCommand(3)->Execute(m_Obj);
+	for (int i{}; i < 5; ++i)
+	{
+		if (input.IsActionTriggered(i)) {
+			input.GetCommand(i)->Execute(m_Obj);
+		}
 	}
 }
 

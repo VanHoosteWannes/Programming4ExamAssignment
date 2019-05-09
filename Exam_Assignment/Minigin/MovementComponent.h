@@ -9,10 +9,10 @@ namespace dae {
 	{
 	public:
 		enum class Direction {
-			Left,
-			Right,
-			Up,
-			Down
+			Left = 0,
+			Right = 1,
+			Up = 2,
+			Down = 3
 		};
 		MovementComponent(float speed, float minX, float minY, float maxX, float maxY, float textureOffset, float tileSize);
 		MovementComponent(const MovementComponent& other) = delete;
@@ -20,7 +20,7 @@ namespace dae {
 		MovementComponent& operator=(const MovementComponent& other) = delete;
 		MovementComponent& operator=(MovementComponent&& other) noexcept = delete;
 		virtual ~MovementComponent() = default;
-
+		Direction GetDirection();
 		void MoveUp();
 		void MoveDown();
 		void MoveRight();

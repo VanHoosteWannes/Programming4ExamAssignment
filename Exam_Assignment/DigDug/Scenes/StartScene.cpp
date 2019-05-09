@@ -14,6 +14,7 @@
 #include "ButtonManager.h"
 #include "SceneManager.h"
 #include "ButtonComponent.h"
+#include "../InputCommands.h"
 
 dae::StartScene::StartScene()
 	:Scene("StartScene")

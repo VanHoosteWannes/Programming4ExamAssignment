@@ -4,39 +4,39 @@
 namespace dae {
 	class Locator //class based off Week7 locator
 	{
-	/*public:
-		static void Initialize() { m_Input1 = m_NullInput; m_Input2 = m_NullInput; }
+	public:
+		static void Initialize() { m_Player1 = m_NullGameObject; m_Player2 = m_NullGameObject; }
 
-		static std::shared_ptr<InputBase>& GetPlayerOneInput() { return m_Input1; }
-		static std::shared_ptr<InputBase>& GetPlayerTwoInput() { return m_Input2; }
+		static std::shared_ptr<GameObject>& GetPlayerOne() { return m_Player1; }
+		static std::shared_ptr<GameObject>& GetPlayerTwo() { return m_Player2; }
 
-		static void ProvidePlayerOneInput(std::shared_ptr<InputBase> service)
+		static void ProvidePlayerOne(std::shared_ptr<GameObject> service)
 		{
 			if (service == nullptr)
 			{
-				m_Input1 = m_NullInput;
+				m_Player1 = m_NullGameObject;
 			}
 			else
 			{
-				m_Input1 = service;
+				m_Player1 = service;
 			}
 		}
-		static void ProvidePlayerTwoInput(std::shared_ptr<InputBase> service)
+		static void ProvidePlayerTwo(std::shared_ptr<GameObject> service)
 		{
 			if (service == nullptr)
 			{
-				m_Input2 = m_NullInput;
+				m_Player2 = m_NullGameObject;
 			}
 			else
 			{
-				m_Input2 = service;
+				m_Player2 = service;
 			}
-		}*/
+		}
 
 	private:
-		//static std::shared_ptr<InputBase> m_Input1;
-		//static std::shared_ptr<InputBase> m_Input2;
-		///static std::shared_ptr<NullInput> m_NullInput;
+		static std::shared_ptr<GameObject> m_Player1;
+		static std::shared_ptr<GameObject> m_Player2;
+		static std::shared_ptr<GameObject> m_NullGameObject;
 	};
 }
 

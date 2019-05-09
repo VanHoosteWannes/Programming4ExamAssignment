@@ -8,7 +8,10 @@ namespace dae {
 	public:
 		DigDugMapComponent(int rows, int cols, float tileSize, float startPositionX, float startPositionY, float textureOffset);
 		virtual ~DigDugMapComponent() = default;
-
+		DigDugMapComponent(const MapComponent& other) = delete;
+		DigDugMapComponent(DigDugMapComponent&& other) noexcept = delete;
+		DigDugMapComponent& operator=(const DigDugMapComponent& other) = delete;
+		DigDugMapComponent& operator=(DigDugMapComponent&& other) noexcept = delete;
 	private:
 		std::vector<std::shared_ptr<FallingComponent>> m_Rocks;
 

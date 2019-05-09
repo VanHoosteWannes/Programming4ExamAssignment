@@ -26,6 +26,19 @@ bool dae::InputManager::ProcessInput() {
 	return true;
 }
 
+dae::InputManager::~InputManager() {
+	if (m_pKeyboardState0 != nullptr)
+	{
+		delete[] m_pKeyboardState0;
+		delete[] m_pKeyboardState1;
+
+		m_pKeyboardState0 = nullptr;
+		m_pKeyboardState1 = nullptr;
+		m_pCurrKeyboardState = nullptr;
+		m_pOldKeyboardState = nullptr;
+	}
+}
+
 void dae::InputManager::ClearAllActionsAndCommands() {
 	m_Commands.clear();
 	m_InputActions.clear();
