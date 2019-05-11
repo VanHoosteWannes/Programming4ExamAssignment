@@ -12,6 +12,7 @@
 #include "Locator.h"
 #include "Scenes/CoopScene.h"
 #include <stdexcept>
+#include "Scenes/VersusScene.h"
 
 #pragma warning(push)
 #pragma warning (disable:4201)
@@ -61,6 +62,7 @@ void dae::Game::LoadGame() const
 	SceneManager::GetInstance().AddScene(std::make_shared<StartScene>());
 	SceneManager::GetInstance().AddScene(std::make_shared<SoloScene>());
 	SceneManager::GetInstance().AddScene(std::make_shared<CoopScene>());
+	SceneManager::GetInstance().AddScene(std::make_shared<VersusScene>());
 
 	SceneManager::GetInstance().Initialize();
 

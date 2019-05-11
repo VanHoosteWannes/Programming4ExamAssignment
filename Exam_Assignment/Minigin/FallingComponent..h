@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Vector3.h"
+#include "CollisionComponent.h"
 
 namespace dae {
 
@@ -20,6 +21,7 @@ namespace dae {
 		void Render() override;
 	private:
 		std::shared_ptr<TextureComponent> m_Texture;
+		std::shared_ptr<CollisionComponent> m_Collider;
 		int m_Index;
 		int m_Rows;
 		int m_Cols;

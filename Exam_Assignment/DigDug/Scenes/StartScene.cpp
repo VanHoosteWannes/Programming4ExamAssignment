@@ -50,15 +50,20 @@ go->AddComponent(texture);
 Add(go);
 
 auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-ButtonComponent* button = new ButtonComponent("Solo", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("SoloScene");/* InputManager::GetInstance().ClearAllActionsAndCommands(); */}, Vector3{ 180.0f,144.0f,0 });
+ButtonComponent* button = new ButtonComponent("Solo", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("SoloScene");}, Vector3{ 180.0f,144.0f,0 });
 m_ButtonSolo->AddComponent(button);
 m_ButtonManager->AddButton(m_ButtonSolo);
 Add(m_ButtonSolo);
 
-ButtonComponent* button1 = new ButtonComponent("Co-op", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("CoopScene");/* InputManager::GetInstance().ClearAllActionsAndCommands();*/ }, Vector3{ 180.0f,288.0f,0 });
+ButtonComponent* button1 = new ButtonComponent("Co-op", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("CoopScene");}, Vector3{ 180.0f,288.0f,0 });
 m_ButtonCoop->AddComponent(button1);
 m_ButtonManager->AddButton(m_ButtonCoop);
 Add(m_ButtonCoop);
+
+ButtonComponent* button2 = new ButtonComponent("Versus", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("VersusScene");}, Vector3{ 180.0f,432.0f,0 });
+m_ButtonVersus->AddComponent(button2);
+m_ButtonManager->AddButton(m_ButtonVersus);
+Add(m_ButtonVersus);
 }
 
 void dae::StartScene::Update(float deltaTime) {

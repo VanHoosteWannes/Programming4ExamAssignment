@@ -192,6 +192,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Scenes\SoloScene.h" />
     <ClInclude Include="Scenes\StartScene.h" />
+    <ClInclude Include="Scenes\VersusScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DigDugHealthComponent.cpp" />
@@ -208,6 +209,7 @@
     </ClCompile>
     <ClCompile Include="Scenes\SoloScene.cpp" />
     <ClCompile Include="Scenes\StartScene.cpp" />
+    <ClCompile Include="Scenes\VersusScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minigin\Minigin.vcxproj">

@@ -7,7 +7,13 @@ void dae::ButtonManager::AddButton(const std::shared_ptr<GameObject>& button)
 {
 	m_pButtons.push_back(button);
 	m_pActiveButton = m_pButtons[0];
-	m_pActiveButton->GetComponent<ButtonComponent>()->Focus();
+	if (m_pActiveButton->HasComponent<ButtonComponent>())
+	{
+		m_pActiveButton->GetComponent<ButtonComponent>()->Focus();
+	}
+	else {
+		Logger::GetInstance().LogError("This GameObject has no ButtonComponent");
+	}
 	m_ElapsedSec = 0.0f;
 }
 
@@ -34,11 +40,11 @@ void dae::ButtonManager::PreviousButton() {
 	{
 		if (m_pButtons[i] == m_pActiveButton)
 		{
-			if(i == m_pButtons.size() - 1) {
-				i = 0;
+			if(i == 0) {
+				i = unsigned int(m_pButtons.size() - 1);
 			}
 			else {
-				i += 1;
+				i -= 1;
 			}
 			m_pActiveButton = m_pButtons[i];
 			m_pActiveButton->GetComponent<ButtonComponent>()->Focus();

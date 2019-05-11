@@ -14,7 +14,7 @@ namespace dae {
 			Up = 2,
 			Down = 3
 		};
-		MovementComponent(float speed, float minX, float minY, float maxX, float maxY, float textureOffset, float tileSize);
+		MovementComponent(float speed, float minX, float minY, float maxX, float maxY, float textureOffset, float tileSize, const std::string& filePath);
 		MovementComponent(const MovementComponent& other) = delete;
 		MovementComponent(MovementComponent&& other) noexcept = delete;
 		MovementComponent& operator=(const MovementComponent& other) = delete;

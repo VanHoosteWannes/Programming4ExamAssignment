@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "CoopScene.h"
+#include "VersusScene.h"
 #include "GameObject.h"
 #include "TextureComponent.h"
 #include "ResourceManager.h"
@@ -14,14 +14,14 @@
 #include "../InputCommands.h"
 #include "../DigDugHealthComponent.h"
 
-dae::CoopScene::CoopScene()
-	:Scene("CoopScene") {
+dae::VersusScene::VersusScene()
+	:Scene("VersusScene") {
 	m_Obj = std::make_shared<GameObject>();
 	m_Obj2 = std::make_shared<GameObject>();
 	m_Level = std::make_shared<GameObject>();
 }
 
-void dae::CoopScene::Initialize() {
+void dae::VersusScene::Initialize() {
 
 	//std::shared_ptr<Input> m_Player2 = std::make_shared<Input>();
 	//Locator::ProvidePlayerTwoInput(m_Player2);
@@ -79,8 +79,8 @@ void dae::CoopScene::Initialize() {
 	Add(m_Level);
 
 
-	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32,"CharacterSpriteSheet.png"};
-	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542, 16,32,"CharacterSpriteSheet.png" };
+	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32,"CharacterSpriteSheet.png" };
+	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542, 16,32,"FygarSpriteSheet.png" };
 	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
 	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{200,544,0}, "LifeP1.png" };
 	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
@@ -99,7 +99,6 @@ void dae::CoopScene::Initialize() {
 	Add(m_Obj2);
 
 	map->AddDigger(m_Obj);
-	map->AddDigger(m_Obj2);
 
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
@@ -111,7 +110,7 @@ void dae::CoopScene::Initialize() {
 
 }
 
-void dae::CoopScene::Update(float) {
+void dae::VersusScene::Update(float) {
 	auto& input = InputManager::GetInstance();
 
 	for (int i{}; i < 5; ++i)
@@ -120,13 +119,13 @@ void dae::CoopScene::Update(float) {
 			input.GetCommand(i)->Execute(m_Obj);
 		}
 	}
-	for(int i{5}; i < 10; ++i) {
+	for (int i{ 5 }; i < 10; ++i) {
 		if (input.IsActionTriggered(i)) {
 			input.GetCommand(i)->Execute(m_Obj2);
 		}
 	}
 }
 
-void dae::CoopScene::Render() {
+void dae::VersusScene::Render() {
 
 }

@@ -2,6 +2,7 @@
 #include "DigDugWeaponComponent.h"
 #include "MovementComponent.h"
 #include "TransformComponent.h"
+#include "Logger.h"
 
 dae::DigDugWeaponComponent::DigDugWeaponComponent(const std::string& filePath)
 {
@@ -43,6 +44,9 @@ void dae::DigDugWeaponComponent::Render() {
 				pos = Vector3{ m_pGameObject->GetTransform()->GetPosition().x - 32, m_pGameObject->GetTransform()->GetPosition().y, m_pGameObject->GetTransform()->GetPosition().z };
 			}
 			m_WeaponTextures[movementID]->Render(pos);
+		}
+		else {
+			Logger::GetInstance().LogError("This GameObject has no MovementComponent");
 		}
 	}
 }

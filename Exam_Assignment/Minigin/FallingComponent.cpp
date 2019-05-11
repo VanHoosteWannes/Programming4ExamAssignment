@@ -11,11 +11,13 @@ dae::FallingComponent::FallingComponent(const std::vector<std::shared_ptr<Block>
 ,m_TileSize(tileSize)
 ,m_TextureOffset(textureOffset){
 	m_Texture = std::make_shared<TextureComponent>(texturePath);
+	m_Collider = std::make_shared<CollisionComponent>(32.0f, 32.0f, "Rock");
 	m_Index = (row *  cols) + col;
 	m_Position = Vector3{ col * tileSize + textureOffset, (tileSize*2 + textureOffset) + (row * tileSize), 0 };
 }
 
 void dae::FallingComponent::Update(float) {
+	m_Collider->Update(m_Position.x, m_Position.y);
 	if (m_Blocks[m_Index + m_Cols]->isPassed) {
 		m_CheckRest = true;
 	}

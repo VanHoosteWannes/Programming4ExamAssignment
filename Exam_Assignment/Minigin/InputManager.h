@@ -53,6 +53,7 @@ namespace dae
 			~InputManager();
 			void ClearAllActionsAndCommands();
 			void Initialize();
+			void QuitGame();
 			void Update();
 			bool ProcessInput();
 			bool AddInputAction(InputAction action);
@@ -63,7 +64,7 @@ namespace dae
 		private:
 			std::map<int, InputAction> m_InputActions;
 			std::map<int, std::shared_ptr<Command>> m_Commands;
-
+			bool m_Playing = true;
 			//no use of shared pointers because it doesnt work for the "GetKeyboardState function
 			BYTE *m_pCurrKeyboardState, *m_pOldKeyboardState, *m_pKeyboardState0, *m_pKeyboardState1;
 

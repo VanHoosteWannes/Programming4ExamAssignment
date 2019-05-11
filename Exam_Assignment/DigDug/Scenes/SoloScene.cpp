@@ -14,6 +14,7 @@
 #include "../InputCommands.h"
 #include "../DigDugHealthComponent.h"
 #include "../DigDugWeaponComponent.h"
+#include "CollisionComponent.h"
 
 dae::SoloScene::SoloScene()
 	:Scene("SoloScene") {
@@ -22,7 +23,6 @@ dae::SoloScene::SoloScene()
 }
 
 void dae::SoloScene::Initialize() {
-
 	auto& input = InputManager::GetInstance();
 
 	input.AddInputAction(InputAction{ 0,KeyState::Down, 'A', XINPUT_GAMEPAD_DPAD_LEFT, GamepadIndex::PlayerOne });
@@ -63,13 +63,16 @@ void dae::SoloScene::Initialize() {
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
 
-	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32 };
+	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet.png"};
 	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
 	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
+	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player" };
+	collision->AllowCollisionWithTag("Enemy");
 
 	m_Obj->AddComponent(movement);
 	m_Obj->AddComponent(health);
 	m_Obj->AddComponent(weapon);
+	m_Obj->AddComponent(collision);
 	m_Obj->GetTransform()->SetPosition(48, 48, 0);
 	Add(m_Obj);
 

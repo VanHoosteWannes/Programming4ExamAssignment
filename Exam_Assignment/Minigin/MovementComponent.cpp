@@ -3,7 +3,7 @@
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
 
-dae::MovementComponent::MovementComponent(float speed, float minX, float minY,float maxX, float maxY, float textureOffset, float tileSize)
+dae::MovementComponent::MovementComponent(float speed, float minX, float minY,float maxX, float maxY, float textureOffset, float tileSize ,const std::string& filePath)
 :m_Speed(speed)
 ,m_MaxY(maxY)
 ,m_MaxX(maxX)
@@ -16,7 +16,7 @@ dae::MovementComponent::MovementComponent(float speed, float minX, float minY,fl
 ,m_TextureOffset(textureOffset)
 ,m_TileSize(tileSize)
 {
-	m_Sprite = std::make_shared<SpriteComponent>("CharacterSpriteSheet.png", 112.0f, 112.0f);
+	m_Sprite = std::make_shared<SpriteComponent>(filePath, 112.0f, 112.0f);
 	m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
 }
 

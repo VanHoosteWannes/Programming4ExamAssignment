@@ -23,7 +23,7 @@ bool dae::InputManager::ProcessInput() {
 	//	}
 	//}
 
-	return true;
+	return m_Playing;
 }
 
 dae::InputManager::~InputManager() {
@@ -53,6 +53,10 @@ void dae::InputManager::Initialize() {
 
 	RefreshControllers();
 	m_IsInitialized = true;
+}
+
+void dae::InputManager::QuitGame() {
+	m_Playing = false;
 }
 
 bool dae::InputManager::SetCommand(int inputId, const std::shared_ptr<Command>& command) {
