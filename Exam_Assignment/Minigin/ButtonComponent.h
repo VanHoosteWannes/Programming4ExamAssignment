@@ -22,7 +22,6 @@ namespace dae {
 	protected:
 		void Render() override;
 		void Update(float deltaTime) override;
-
 	private:
 		void(*m_Function)();
 		std::shared_ptr<TextComponent> m_Text;

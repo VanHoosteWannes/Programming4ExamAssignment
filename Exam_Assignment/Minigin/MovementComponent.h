@@ -21,15 +21,16 @@ namespace dae {
 		MovementComponent& operator=(MovementComponent&& other) noexcept = delete;
 		virtual ~MovementComponent() = default;
 		Direction GetDirection();
+		void LockMovement(bool lock);
 		void MoveUp();
 		void MoveDown();
 		void MoveRight();
 		void MoveLeft();
-
+		void SetSpriteInfo(int rows, int cols, int xOffset1, int xOffset2, int yOffset, float size);
 	protected:
 		void Render() override;
 		void Update(float deltaTime) override;
-
+		float m_Blocked = false;
 		float m_Speed;
 		float m_MaxX;
 		float m_MaxY;

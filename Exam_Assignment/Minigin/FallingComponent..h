@@ -10,13 +10,13 @@ namespace dae {
 	class FallingComponent final:public Component
 	{
 	public:
-		FallingComponent(const std::vector<std::shared_ptr<Block>>& blocks, const std::string& texturePath,int row, int col, int rows, int cols, float tileSize, float textureOffset);
+		FallingComponent(const std::vector<std::shared_ptr<Block>>& blocks,const std::string& texturePath,int row, int col, int rows, int cols, float tileSize, float textureOffset);
 		virtual ~FallingComponent() = default;
 		FallingComponent(const FallingComponent& other) = delete;
 		FallingComponent(FallingComponent&& other) noexcept = delete;
 		FallingComponent& operator=(const FallingComponent& other) = delete;
 		FallingComponent& operator=(FallingComponent&& other) noexcept = delete;
-
+		void SetDiggers(const std::vector<std::shared_ptr<GameObject>>& diggers) { m_Diggers = diggers; };
 		void Update(float deltaTime) override;
 		void Render() override;
 	private:
@@ -31,7 +31,11 @@ namespace dae {
 		float m_EndPosition;
 		bool m_IsFalling;
 		bool m_CheckRest;
+		bool m_IsUnderneath = true;
+		bool m_HasFallen = false;
+		bool m_Broken = false;
 		std::vector<std::shared_ptr<Block>> m_Blocks;
+		std::vector<std::shared_ptr<GameObject>> m_Diggers;
 	};
 }
 

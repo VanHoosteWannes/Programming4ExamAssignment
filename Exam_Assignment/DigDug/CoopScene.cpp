@@ -10,9 +10,9 @@
 #include "InputManager.h"
 #include "MapComponent.h"
 #include "Locator.h"
-#include "../DigDugMapComponent.h"
-#include "../InputCommands.h"
-#include "../DigDugHealthComponent.h"
+#include "DigDugMapComponent.h"
+#include "InputCommands.h"
+#include "DigDugHealthComponent.h"
 
 dae::CoopScene::CoopScene()
 	:Scene("CoopScene") {
@@ -44,7 +44,7 @@ void dae::CoopScene::Initialize() {
 	std::shared_ptr<MoveDownCommand> down = std::make_shared<MoveDownCommand>();
 	input.SetCommand(3, down);
 
-	input.AddInputAction(InputAction{ 4,KeyState::Down, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	input.AddInputAction(InputAction{ 4,KeyState::Released, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
 	std::shared_ptr<ShootCommand> shoot = std::make_shared<ShootCommand>();
 	input.SetCommand(4, shoot);
 
@@ -64,7 +64,7 @@ void dae::CoopScene::Initialize() {
 	down = std::make_shared<MoveDownCommand>();
 	input.SetCommand(8, down);
 
-	input.AddInputAction(InputAction{ 9,KeyState::Down, VK_SHIFT, XINPUT_GAMEPAD_A, GamepadIndex::PlayerTwo });
+	input.AddInputAction(InputAction{ 9,KeyState::Released, VK_SHIFT, XINPUT_GAMEPAD_A, GamepadIndex::PlayerTwo });
 	shoot = std::make_shared<ShootCommand>();
 	input.SetCommand(9, shoot);
 
@@ -79,26 +79,37 @@ void dae::CoopScene::Initialize() {
 	Add(m_Level);
 
 
-	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32,"CharacterSpriteSheet.png"};
-	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542, 16,32,"CharacterSpriteSheet.png" };
-	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
-	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{200,544,0}, "LifeP1.png" };
-	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
-	DigDugWeaponComponent* weapon2 = new DigDugWeaponComponent{ "Weapon.png" };
+	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet.png" };
+	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet2.png" };
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48,0} };
+	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{320,544,0}, "LifeP2.png", Vector3{345,48,0} };
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
+	weapon->AllowCollisionWithTag("Enemy");
+	DigDugWeaponComponent* weapon2 = new DigDugWeaponComponent{ "Weapon.png",true };
+	weapon2->AllowCollisionWithTag("Enemy");
+	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player",16 };
+	collision->AllowCollisionWithTag("Enemy");
+	collision->AllowCollisionWithTag("Rock");
+	CollisionComponent* collision2 = new CollisionComponent{ 30,30, "Player",16 };
+	collision2->AllowCollisionWithTag("Enemy");
+	collision2->AllowCollisionWithTag("Rock");
 
 	m_Obj->AddComponent(movement);
 	m_Obj->AddComponent(health);
 	m_Obj->AddComponent(weapon);
-	m_Obj->GetTransform()->SetPosition(45, 48, 0);
+	m_Obj->AddComponent(collision);
+	m_Obj->GetTransform()->SetPosition(48, 48, 0);
 	Add(m_Obj);
+
+	map->AddDigger(m_Obj);
 
 	m_Obj2->AddComponent(movement2);
 	m_Obj2->AddComponent(health2);
 	m_Obj2->AddComponent(weapon2);
+	m_Obj2->AddComponent(collision2);
 	m_Obj2->GetTransform()->SetPosition(345, 48, 0);
 	Add(m_Obj2);
 
-	map->AddDigger(m_Obj);
 	map->AddDigger(m_Obj2);
 
 

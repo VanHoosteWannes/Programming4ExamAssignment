@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include <algorithm>
 #include "InputManager.h"
+#include "../DigDug/PointsManager.h"
 
 
 void dae::SceneManager::Update(float deltaTime)
@@ -46,8 +47,10 @@ void dae::SceneManager::NextScene() {
 		if (m_pScenes[i] == m_ActiveScene)
 		{
 			auto nextScene = ++i % m_pScenes.size();
+			m_LastActiveScene = m_ActiveScene->GetSceneName();
 			m_ActiveScene = m_pScenes[nextScene];
 			InputManager::GetInstance().ClearAllActionsAndCommands();
+			PointsManager::GetInstance().ResetPoints();
 			m_ActiveScene->RootInitialize();
 			break;
 		}
@@ -63,8 +66,10 @@ void dae::SceneManager::PreviousScene() {
 			{
 				i = unsigned int(m_pScenes.size() - 1);
 			}
+			m_LastActiveScene = m_ActiveScene->GetSceneName();
 			m_ActiveScene = m_pScenes[i];
 			InputManager::GetInstance().ClearAllActionsAndCommands();
+			PointsManager::GetInstance().ResetPoints();
 			m_ActiveScene->RootInitialize();
 			break;
 		}
@@ -74,8 +79,10 @@ void dae::SceneManager::PreviousScene() {
 void dae::SceneManager::SetActivateScene(const std::string& sceneName) {
 	for(auto element: m_pScenes) {
 		if(element->GetSceneName() == sceneName) {
+			m_LastActiveScene = m_ActiveScene->GetSceneName();
 			m_ActiveScene = element;
 			InputManager::GetInstance().ClearAllActionsAndCommands();
+			PointsManager::GetInstance().ResetPoints();
 			m_ActiveScene->RootInitialize();
 			break;
 		}

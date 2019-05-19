@@ -9,7 +9,7 @@ dae::DigDugMapComponent::DigDugMapComponent(int rows, int cols, float tileSize, 
 	float startPositionY, float textureOffset)
 	:MapComponent(rows,cols,tileSize,startPositionX,startPositionY,textureOffset)
 {
-	BinaryReader reader{ "level1.bin" };
+	BinaryReader reader{ "../Data/Levels/level1.bin" };
 	for (int i{}; i < rows * cols; ++i) {
 		if (reader.Read<bool>() == true) {
 			m_Blocks[i]->isPassed = true;
@@ -17,8 +17,8 @@ dae::DigDugMapComponent::DigDugMapComponent(int rows, int cols, float tileSize, 
 	}
 	reader.CloseFile();
 	m_Rocks.push_back(std::make_shared<FallingComponent>(m_Blocks,"rock.png" ,2, 1, rows, cols, tileSize, textureOffset));
-	m_Rocks.push_back(std::make_shared<FallingComponent>(m_Blocks, "rock.png",3, 7, rows, cols, tileSize, textureOffset));
-	m_Rocks.push_back(std::make_shared<FallingComponent>(m_Blocks, "rock.png",5, 3, rows, cols, tileSize, textureOffset));
+	m_Rocks.push_back(std::make_shared<FallingComponent>(m_Blocks,"rock.png",3, 7, rows, cols, tileSize, textureOffset));
+	m_Rocks.push_back(std::make_shared<FallingComponent>(m_Blocks,"rock.png",5, 3, rows, cols, tileSize, textureOffset));
 }
 
 void dae::DigDugMapComponent::Update(float deltaTime) {
@@ -31,6 +31,7 @@ void dae::DigDugMapComponent::Update(float deltaTime) {
 		}
 	}
 	for (auto element : m_Rocks) {
+		element->SetDiggers(m_Diggers);
 		element->Update(deltaTime);
 	}
 }

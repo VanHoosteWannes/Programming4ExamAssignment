@@ -10,16 +10,18 @@
 #include "InputManager.h"
 #include "MapComponent.h"
 #include "Locator.h"
-#include "../DigDugMapComponent.h"
-#include "../InputCommands.h"
-#include "../DigDugHealthComponent.h"
-#include "../DigDugWeaponComponent.h"
+#include "DigDugMapComponent.h"
+#include "InputCommands.h"
+#include "DigDugHealthComponent.h"
+#include "DigDugWeaponComponent.h"
 #include "CollisionComponent.h"
+#include "PointsManager.h"
 
 dae::SoloScene::SoloScene()
 	:Scene("SoloScene") {
 	m_Obj = std::make_shared<GameObject>();
 	m_Level = std::make_shared<GameObject>();
+	m_Score = std::make_shared<GameObject>();
 }
 
 void dae::SoloScene::Initialize() {
@@ -42,7 +44,7 @@ void dae::SoloScene::Initialize() {
 	input.SetCommand(3, down);
 
 
-	input.AddInputAction(InputAction{ 4,KeyState::Down, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	input.AddInputAction(InputAction{ 4,KeyState::Released, VK_SPACE, XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
 	std::shared_ptr<ShootCommand> shoot = std::make_shared<ShootCommand>();
 	input.SetCommand(4, shoot);
 
@@ -64,10 +66,12 @@ void dae::SoloScene::Initialize() {
 
 
 	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet.png"};
-	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png" };
-	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png" };
-	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player" };
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48} };
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
+	weapon->AllowCollisionWithTag("Enemy");
+	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player",16 };
 	collision->AllowCollisionWithTag("Enemy");
+	collision->AllowCollisionWithTag("Rock");
 
 	m_Obj->AddComponent(movement);
 	m_Obj->AddComponent(health);
@@ -85,11 +89,16 @@ void dae::SoloScene::Initialize() {
 	go->GetTransform()->SetPosition(0, 0, 0);
 	Add(go);
 
+
+	TextComponent* score = new TextComponent{ "Score: 0", font, Vector3{1.0f,1.0f,1.0f} };
+	m_Score->AddComponent(score);
+	Add(m_Score);
+	m_Score->GetTransform()->Translate(200, 0, 0);
 }
 
 void dae::SoloScene::Update(float) {
 	auto& input = InputManager::GetInstance();
-
+	m_Score->GetComponent<TextComponent>()->SetText("Score: " + std::to_string(PointsManager::GetInstance().GetPoints()));
 	for (int i{}; i < 5; ++i)
 	{
 		if (input.IsActionTriggered(i)) {

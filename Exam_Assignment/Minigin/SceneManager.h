@@ -14,6 +14,7 @@ namespace dae
 		void RemoveScene(const std::shared_ptr<Scene>& pScene);
 		void NextScene();
 		void PreviousScene();
+		std::string GetLastActiveScene() { return m_LastActiveScene; }
 		std::shared_ptr<Scene> GetActiveScene() const { return m_ActiveScene; }
 		void SetActivateScene(const std::string& sceneName);
 
@@ -23,6 +24,7 @@ namespace dae
 
 	private:
 		std::vector<std::shared_ptr<Scene>> m_pScenes;
+		std::string m_LastActiveScene = "0";
 		std::shared_ptr<Scene> m_ActiveScene, m_NewActiveScene;
 	};
 

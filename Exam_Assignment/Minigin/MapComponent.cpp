@@ -40,4 +40,5 @@ void dae::MapComponent::Update(float) {
 }
 
 void dae::MapComponent::Render() {
+	
 }

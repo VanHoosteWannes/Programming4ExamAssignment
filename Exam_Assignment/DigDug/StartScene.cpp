@@ -14,11 +14,11 @@
 #include "ButtonManager.h"
 #include "SceneManager.h"
 #include "ButtonComponent.h"
-#include "../InputCommands.h"
+#include "InputCommands.h"
 
 dae::StartScene::StartScene()
 	:Scene("StartScene")
-,m_Song(std::make_unique<SoundEffect>("Death_screen.ogg"))
+,m_Song(std::make_unique<SoundEffect>("../Data/Sounds/Death_screen.ogg"))
 {
 	m_ButtonManager = std::make_shared<ButtonManager>();
 	m_ButtonSolo = std::make_shared<GameObject>();
@@ -40,7 +40,7 @@ void dae::StartScene::Initialize() {
 
 	input.AddInputAction(InputAction{ 1,KeyState::Down, 'S', XINPUT_GAMEPAD_DPAD_DOWN, GamepadIndex::PlayerOne });
 
-	input.AddInputAction(InputAction{ 2,KeyState::Down, 'P', XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	input.AddInputAction(InputAction{ 2,KeyState::Released, 'P', XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
 	std::shared_ptr<ButtonActivateCommand> press = std::make_shared<ButtonActivateCommand>();
 	input.SetCommand(2, press);
 
@@ -64,6 +64,7 @@ ButtonComponent* button2 = new ButtonComponent("Versus", font, Vector3{ 0.0f,0.0
 m_ButtonVersus->AddComponent(button2);
 m_ButtonManager->AddButton(m_ButtonVersus);
 Add(m_ButtonVersus);
+
 }
 
 void dae::StartScene::Update(float deltaTime) {

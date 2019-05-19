@@ -22,6 +22,7 @@ namespace dae {
 		std::shared_ptr<GameObject> m_Obj;
 		std::shared_ptr<GameObject> m_Obj2;
 		std::shared_ptr<GameObject> m_Level;
+		std::shared_ptr<GameObject> m_Score;
 	};
 }
 

@@ -7,12 +7,13 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 #include <SDL.h>
-#include "Scenes/StartScene.h"
-#include "Scenes/SoloScene.h"
+#include "StartScene.h"
+#include "SoloScene.h"
 #include "Locator.h"
-#include "Scenes/CoopScene.h"
+#include "CoopScene.h"
 #include <stdexcept>
-#include "Scenes/VersusScene.h"
+#include "VersusScene.h"
+#include "EndSceen.h"
 
 #pragma warning(push)
 #pragma warning (disable:4201)
@@ -63,6 +64,7 @@ void dae::Game::LoadGame() const
 	SceneManager::GetInstance().AddScene(std::make_shared<SoloScene>());
 	SceneManager::GetInstance().AddScene(std::make_shared<CoopScene>());
 	SceneManager::GetInstance().AddScene(std::make_shared<VersusScene>());
+	SceneManager::GetInstance().AddScene(std::make_shared<EndSceen>());
 
 	SceneManager::GetInstance().Initialize();
 
