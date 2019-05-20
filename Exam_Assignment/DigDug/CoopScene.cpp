@@ -79,10 +79,10 @@ void dae::CoopScene::Initialize() {
 	Add(m_Level);
 
 
-	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet.png" };
-	MovementComponent* movement2 = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet2.png" };
+	MovementComponent* movement = new MovementComponent{ 2.0f,0,64,448, 542,16,32, "CharacterSpriteSheet.png" };
+	MovementComponent* movement2 = new MovementComponent{ 2.0f,0,64,448, 542,16,32, "CharacterSpriteSheet2.png" };
 	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48,0} };
-	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{320,544,0}, "LifeP2.png", Vector3{345,48,0} };
+	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{320,544,0}, "LifeP2.png", Vector3{368,48,0} };
 	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
 	weapon->AllowCollisionWithTag("Enemy");
 	DigDugWeaponComponent* weapon2 = new DigDugWeaponComponent{ "Weapon.png",true };
@@ -107,7 +107,7 @@ void dae::CoopScene::Initialize() {
 	m_Obj2->AddComponent(health2);
 	m_Obj2->AddComponent(weapon2);
 	m_Obj2->AddComponent(collision2);
-	m_Obj2->GetTransform()->SetPosition(345, 48, 0);
+	m_Obj2->GetTransform()->SetPosition(368, 48, 0);
 	Add(m_Obj2);
 
 	map->AddDigger(m_Obj2);
@@ -125,16 +125,37 @@ void dae::CoopScene::Initialize() {
 void dae::CoopScene::Update(float) {
 	auto& input = InputManager::GetInstance();
 
-	for (int i{}; i < 5; ++i)
-	{
-		if (input.IsActionTriggered(i)) {
-			input.GetCommand(i)->Execute(m_Obj);
-		}
+	if (input.IsActionTriggered(4)) {
+		input.GetCommand(4)->Execute(m_Obj);
 	}
-	for(int i{5}; i < 10; ++i) {
-		if (input.IsActionTriggered(i)) {
-			input.GetCommand(i)->Execute(m_Obj2);
-		}
+	if (input.IsActionTriggered(0)) {
+		input.GetCommand(0)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(1)) {
+		input.GetCommand(1)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(2)) {
+		input.GetCommand(2)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(3)) {
+		input.GetCommand(3)->Execute(m_Obj);
+	}
+
+	if (input.IsActionTriggered(9)) {
+		input.GetCommand(9)->Execute(m_Obj2);
+	}
+
+	if (input.IsActionTriggered(5)) {
+		input.GetCommand(5)->Execute(m_Obj2);
+	}
+	else if (input.IsActionTriggered(6)) {
+		input.GetCommand(6)->Execute(m_Obj2);
+	}
+	else if (input.IsActionTriggered(7)) {
+		input.GetCommand(7)->Execute(m_Obj2);
+	}
+	else if (input.IsActionTriggered(8)) {
+		input.GetCommand(8)->Execute(m_Obj2);
 	}
 }
 

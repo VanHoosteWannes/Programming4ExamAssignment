@@ -1,0 +1,44 @@
+﻿  MiniginPCH.cpp
+  AStarPathfinder.cpp
+  BinaryReader.cpp
+  ButtonComponent.cpp
+  ButtonManager.cpp
+  CollisionComponent.cpp
+  Component.cpp
+  Font.cpp
+  FPSComponent.cpp
+  GameObject.cpp
+  HealthComponent.cpp
+  InputManager.cpp
+  Locator.cpp
+  Logger.cpp
+  MapComponent.cpp
+  MovementComponent.cpp
+  Renderer.cpp
+  ResourceManager.cpp
+  FallingComponent.cpp
+  Scene.cpp
+  SceneManager.cpp
+  Generating Code...
+  Compiling...
+  SoundEffect.cpp
+  SpriteComponent.cpp
+  StateMachine.cpp
+  TextComponent.cpp
+  Texture2D.cpp
+  TextureComponent.cpp
+  TransformComponent.cpp
+  Generating Code...
+  Minigin.vcxproj -> C:\Users\wanne\Desktop\Engine\Exam_Assignment\x64\Debug\Minigin.lib
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2\lib\x64\SDL2.dll
+  1 File(s) copied
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\libjpeg-9.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\libpng16-16.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\libtiff-5.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\libwebp-7.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\SDL2_image.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_image\lib\x64\zlib1.dll
+  6 File(s) copied
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_ttf\lib\x64\libfreetype-6.dll
+  C:\Users\wanne\Desktop\Engine\Exam_Assignment\3rdParty\SDL2_ttf\lib\x64\SDL2_ttf.dll
+  2 File(s) copied

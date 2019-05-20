@@ -21,7 +21,7 @@ namespace dae {
 	private:
 		bool m_Active;
 		float m_AccuSet;
-		float m_FrameTime = 0.1f;
+		float m_FrameTime = 0.3f;
 		std::vector<std::shared_ptr<TextureComponent>> m_WeaponTextures;
 		std::vector<std::shared_ptr<CollisionComponent>> m_CollisionBoxes;
 	};

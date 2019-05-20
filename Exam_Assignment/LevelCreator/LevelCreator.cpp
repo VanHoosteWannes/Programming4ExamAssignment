@@ -42,10 +42,13 @@ int main()
 	}
 
 	//add tunnels for the game here
-	AddTunnel(0, 0, 4, true);
-	AddTunnel(5, 6, 6, false);
+	AddTunnel(1, 1, 4, true);
+	AddTunnel(5, 1, 6, false);
+	AddTunnel(3, 7, 3, true);
+	AddTunnel(10, 9, 3, false);
+	AddTunnel(11, 9, 3, false);
 
-	BinaryWriter writer{ "level1.bin" };
+	BinaryWriter writer{ "level2.bin" };
 	for (unsigned int i{}; i < m_Blocks.size(); ++i)
 	{
 		writer.Write<bool>(m_Blocks[i]);

@@ -45,22 +45,28 @@ void dae::SpriteComponent::SetSpriteInfo(int rows, int cols, int xOffset1, int x
 }
 
 void dae::SpriteComponent::Render() {
-	auto pos = m_pGameObject->GetTransform()->GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
-		SDL_Rect{ int((m_Width / m_Cols) * m_ActFrame), int(m_Height / m_Rows * m_YOffset), int(m_Width / m_Cols), int(m_Height / m_Rows) });
+	if (!m_StopRender)
+	{
+		auto pos = m_pGameObject->GetTransform()->GetPosition();
+		Renderer::GetInstance().RenderTexture(*m_Texture, pos.x - m_Width / m_Cols / 2 * m_Scale, pos.y - m_Height / m_Rows / 2 * m_Scale, m_Width / m_Cols * m_Scale, m_Height / m_Rows * m_Scale,
+			SDL_Rect{ int((m_Width / m_Cols) * m_ActFrame), int(m_Height / m_Rows * m_YOffset), int(m_Width / m_Cols), int(m_Height / m_Rows) });
+	}
 }
 void dae::SpriteComponent::Update(float deltaTime) {
-	UNREFERENCED_PARAMETER(deltaTime);
-	m_AccuSet += deltaTime;
-	if (m_AccuSet > m_FrameSec)
+	if (!m_StopRender)
 	{
-		++m_ActFrame;
-		if (m_ActFrame >= m_Xoffset2)
+		UNREFERENCED_PARAMETER(deltaTime);
+		m_AccuSet += deltaTime;
+		if (m_AccuSet > m_FrameSec)
 		{
-			m_ActFrame = m_Xoffset1;
-		}
+			++m_ActFrame;
+			if (m_ActFrame >= m_Xoffset2)
+			{
+				m_ActFrame = m_Xoffset1;
+			}
 
-		m_AccuSet -= m_FrameSec;
+			m_AccuSet -= m_FrameSec;
+		}
 	}
 }
 

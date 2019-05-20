@@ -27,6 +27,7 @@ namespace dae {
 		void MoveRight();
 		void MoveLeft();
 		void SetSpriteInfo(int rows, int cols, int xOffset1, int xOffset2, int yOffset, float size);
+		void SetGhostMode(int isGhost) { m_GhostMode = isGhost; }
 	protected:
 		void Render() override;
 		void Update(float deltaTime) override;
@@ -43,6 +44,7 @@ namespace dae {
 		bool m_CanMoveUpDown;
 		bool m_CanMoveLeftRight;
 		bool m_Corrections[8];
+		bool m_GhostMode = false;
 		std::shared_ptr<SpriteComponent> m_Sprite;
 	};
 }

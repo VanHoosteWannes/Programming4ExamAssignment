@@ -5,15 +5,15 @@
 void dae::StateMachine::Start()
 {}
 
-void dae::StateMachine::Update()
+void dae::StateMachine::Update(float deltaTime)
 {
 	//Check all transitions for current state and see if we need to transition!
 	auto transitions = m_CurrentState->GetTransitions();
 	auto transitionTriggered = false;
-	Transition* triggeredTransition = {};
+	std::shared_ptr<Transition> triggeredTransition = {};
 	for (auto trans : transitions)
 	{
-		transitionTriggered = trans->IsTriggered();
+		transitionTriggered = trans->IsTriggered(m_Index);
 		if (transitionTriggered)
 		{
 			triggeredTransition = trans;
@@ -28,15 +28,14 @@ void dae::StateMachine::Update()
 		auto targetState = triggeredTransition->GetTargetState();
 
 		//End current state, do transition actions and enter the new state
-		m_CurrentState->RunExitActions();
-		triggeredTransition->RunActions();
-		targetState->RunEntryActions();
+		m_CurrentState->RunExitActions(m_Index,deltaTime);
+		targetState->RunEntryActions(m_Index,deltaTime);
 
 		//Switch
 		m_CurrentState = targetState;
 	}
 	else //Else continue performing the current actions
 	{
-		m_CurrentState->RunActions();
+		m_CurrentState->RunActions(m_Index, deltaTime);
 	}
 }

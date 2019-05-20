@@ -5,6 +5,8 @@
 #include "TransformComponent.h"
 #include "BinaryReader.h"
 
+std::vector<std::shared_ptr<dae::Block>> dae::MapComponent::m_Blocks;
+
 dae::MapComponent::MapComponent(int rows, int cols, float tileSize,float startPositionX, float startPositionY, float textureOffset) 
 :m_Rows(rows)
 ,m_Cols(cols)

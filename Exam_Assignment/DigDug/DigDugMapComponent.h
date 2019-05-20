@@ -14,6 +14,7 @@ namespace dae {
 		DigDugMapComponent& operator=(DigDugMapComponent&& other) noexcept = delete;
 	private:
 		std::vector<std::shared_ptr<FallingComponent>> m_Rocks;
+		std::shared_ptr<GameObject> m_Versus;
 
 		void Update(float deltaTime) override;
 		void Render() override;

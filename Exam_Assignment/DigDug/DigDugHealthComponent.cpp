@@ -8,8 +8,7 @@
 #include "SceneManager.h"
 
 dae::DigDugHealthComponent::DigDugHealthComponent(int lives, Vector3 startPos, const std::string& filePath, Vector3 respawnPoint)
-	:HealthComponent{ lives }
-	, m_StartPos(startPos)
+	: m_StartPos(startPos)
 	, m_DieTime(0.9f)
 	, m_AccuSec(0.0f)
 ,m_RespawnPoint(respawnPoint)
@@ -22,12 +21,13 @@ dae::DigDugHealthComponent::DigDugHealthComponent(int lives, Vector3 startPos, c
 void dae::DigDugHealthComponent::Update(float elapsedSec) {
 	if (!m_IsDying)
 	{
-		if (m_pGameObject->GetComponent<CollisionComponent>()->GetColliding()) {
+		auto coll = m_pGameObject->GetComponent<CollisionComponent>();
+		if (coll->GetColliding() && coll->GetLastCollidedTag() != "Weapon") {
 			RemoveLife();
 			m_pGameObject->GetComponent<MovementComponent>()->LockMovement(true);
 			m_pGameObject->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 5, 6, 2);
 
-			if(m_pGameObject->GetComponent<CollisionComponent>()->GetLastCollidedTag() == "Rock" && m_pGameObject->GetComponent<CollisionComponent>()->GetTag() == "Enemy") {
+			if(coll->GetLastCollidedTag() == "Rock" && coll->GetTag() == "Enemy") {
 				PointsManager::GetInstance().AddPoints(1000);
 			}
 			m_IsDying = true;
@@ -55,4 +55,8 @@ void dae::DigDugHealthComponent::Render() {
 			m_LifeTextures[i]->Render(Vector3{ float(m_StartPos.x + (i * 40)),m_StartPos.y,m_StartPos.z });
 		}
 	}
+}
+
+void dae::DigDugHealthComponent::RemoveLife() {
+	--m_Lives;
 }

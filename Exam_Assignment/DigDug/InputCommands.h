@@ -13,6 +13,8 @@ namespace dae {
 			if (object->HasComponent<MovementComponent>())
 			{
 				object->GetComponent<MovementComponent>()->MoveRight();
+				//object->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 2, 0, 2);
+
 			}
 		}
 	};
@@ -23,6 +25,7 @@ namespace dae {
 			if (object->HasComponent<MovementComponent>())
 			{
 				object->GetComponent<MovementComponent>()->MoveLeft();
+				//object->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 2, 1, 2);
 			}
 		}
 	};
@@ -34,6 +37,7 @@ namespace dae {
 			if (object->HasComponent<MovementComponent>())
 			{
 				object->GetComponent<MovementComponent>()->MoveUp();
+				//object->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 2, 5, 2);
 			}
 		}
 	};
@@ -45,6 +49,7 @@ namespace dae {
 			if (object->HasComponent<MovementComponent>())
 			{
 				object->GetComponent<MovementComponent>()->MoveDown();
+				//object->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 2, 3, 2);
 			}
 		}
 	};

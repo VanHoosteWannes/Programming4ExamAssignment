@@ -9,7 +9,7 @@ dae::DigDugMapComponent::DigDugMapComponent(int rows, int cols, float tileSize, 
 	float startPositionY, float textureOffset)
 	:MapComponent(rows,cols,tileSize,startPositionX,startPositionY,textureOffset)
 {
-	BinaryReader reader{ "../Data/Levels/level1.bin" };
+	BinaryReader reader{ "../Data/Levels/level2.bin" };
 	for (int i{}; i < rows * cols; ++i) {
 		if (reader.Read<bool>() == true) {
 			m_Blocks[i]->isPassed = true;

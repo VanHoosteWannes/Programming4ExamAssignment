@@ -35,7 +35,10 @@ void dae::MovementComponent::MoveUp() {
 		m_CurrentDirection = Direction::Up;
 		if (m_CanMoveUpDown)
 		{
-			m_Sprite->SetSpriteInfo(7, 7, 0, 2, 5, 2);
+			if (!m_GhostMode)
+			{
+				m_Sprite->SetSpriteInfo(7, 7, 0, 2, 5, 2);
+			}
 
 			if (m_pGameObject->GetTransform()->GetPosition().y + m_Speed >= m_MinY + m_TextureOffset)
 			{
@@ -52,7 +55,10 @@ void dae::MovementComponent::MoveDown(){
 		m_CurrentDirection = Direction::Down;
 		if (m_CanMoveUpDown)
 		{
-			m_Sprite->SetSpriteInfo(7, 7, 0, 2, 3, 2);
+			if (!m_GhostMode)
+			{
+				m_Sprite->SetSpriteInfo(7, 7, 0, 2, 3, 2);
+			}
 
 			if (m_pGameObject->GetTransform()->GetPosition().y - m_Speed <= m_MaxY - m_TextureOffset)
 			{
@@ -69,7 +75,10 @@ void dae::MovementComponent::MoveRight(){
 		m_CurrentDirection = Direction::Right;
 		if (m_CanMoveLeftRight)
 		{
-			m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
+			if (!m_GhostMode)
+			{
+				m_Sprite->SetSpriteInfo(7, 7, 0, 2, 0, 2);
+			}
 
 			if (m_pGameObject->GetTransform()->GetPosition().x + m_Speed <= m_MaxX - m_TextureOffset)
 			{
@@ -86,7 +95,10 @@ void dae::MovementComponent::MoveLeft() {
 		m_CurrentDirection = Direction::Left;
 		if (m_CanMoveLeftRight)
 		{
-			m_Sprite->SetSpriteInfo(7, 7, 0, 2, 1, 2);
+			if (!m_GhostMode)
+			{
+				m_Sprite->SetSpriteInfo(7, 7, 0, 2, 1, 2);
+			}
 
 			if (m_pGameObject->GetTransform()->GetPosition().x - m_Speed >= m_MinX + m_TextureOffset)
 			{

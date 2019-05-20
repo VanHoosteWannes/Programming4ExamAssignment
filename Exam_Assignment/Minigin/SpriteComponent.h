@@ -18,6 +18,7 @@ namespace dae{
 		void Render(Vector3 pos);
 		void SetSpriteInfo(int rows, int cols, int xOffset1, int xOffset2, int yOffset, float scale);
 		void Update(float deltaTime) override;
+		void StopRender(bool stopRender) { m_StopRender = stopRender; }
 	protected:
 		std::shared_ptr<Texture2D> m_Texture;
 		SDL_Rect m_SourceRect;
@@ -32,6 +33,7 @@ namespace dae{
 		float m_Scale;
 		float m_FrameSec;
 		float m_AccuSet;
+		bool m_StopRender = false;
 
 		void Render() override;
 	};

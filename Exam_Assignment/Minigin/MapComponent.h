@@ -16,9 +16,9 @@ namespace dae {
 		MapComponent& operator=(MapComponent&& other) noexcept = delete;
 		MapComponent(int rows, int cols, float tileSize,float startPositionX, float startPositionY, float textureOffset);
 		void AddDigger(const std::shared_ptr<GameObject>& digger);
-
+		static std::vector<std::shared_ptr<Block>>& GetBlocks() { return m_Blocks; };
 	protected:
-		std::vector<std::shared_ptr<Block>> m_Blocks;
+		static std::vector<std::shared_ptr<Block>> m_Blocks;
 		std::vector<std::shared_ptr<GameObject>> m_Diggers;
 		//std::vector<std::shared_ptr<RockComponent>> m_Rocks;
 		int m_Rows;

@@ -13,7 +13,7 @@ dae::FallingComponent::FallingComponent(const std::vector<std::shared_ptr<Block>
 ,m_TextureOffset(textureOffset)
 {
 	m_Texture = std::make_shared<TextureComponent>(texturePath);
-	m_Collider = std::make_shared<CollisionComponent>(32.0f, 32.0f, "Rock",16);
+	m_Collider = std::make_shared<CollisionComponent>(30.0f, 32.0f, "Rock",16);
 	m_Collider->AllowCollisionWithTag("Player");
 	m_Collider->AllowCollisionWithTag("Enemy");
 	m_Collider->SetActive(false);
@@ -52,7 +52,7 @@ void dae::FallingComponent::Update(float) {
 				if (m_IsUnderneath)
 				{
 					for (auto element : m_Diggers) {
-						if (element->GetTransform()->GetPosition().x >= m_Position.x - 15 && element->GetTransform()->GetPosition().x <= m_Position.x + 15) {
+						if (element->GetTransform()->GetPosition().x >= m_Position.x - 30 && element->GetTransform()->GetPosition().x <= m_Position.x + 30) {
 							m_IsUnderneath = true;
 							break;
 						}
@@ -63,7 +63,7 @@ void dae::FallingComponent::Update(float) {
 				}
 				if (!m_IsUnderneath)
 				{
-					m_Position.y += 0.1f;
+					m_Position.y += 2.f;
 					m_Collider->SetActive(true);
 					m_HasFallen = true;
 				}

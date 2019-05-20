@@ -52,6 +52,21 @@
     <ClInclude Include="pch.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="DigDugInflateComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugGhostComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugConditions.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="DigDugActions.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
+      <Filter>Base</Filter>
+    </ClInclude>
     <ClInclude Include="PointsManager.h">
       <Filter>Base</Filter>
     </ClInclude>
@@ -84,9 +99,6 @@
     <ClCompile Include="VersusScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="PointsManager.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="DigDug.cpp">
       <Filter>Base</Filter>
     </ClCompile>
@@ -94,6 +106,15 @@
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="DigDugInflateComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="DigDugGhostComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PointsManager.cpp">
       <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>

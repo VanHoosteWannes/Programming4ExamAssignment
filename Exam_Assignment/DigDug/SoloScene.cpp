@@ -16,6 +16,8 @@
 #include "DigDugWeaponComponent.h"
 #include "CollisionComponent.h"
 #include "PointsManager.h"
+#include "AIComponent.h"
+#include "EnemySpawner.h"
 
 dae::SoloScene::SoloScene()
 	:Scene("SoloScene") {
@@ -65,7 +67,7 @@ void dae::SoloScene::Initialize() {
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
 
-	MovementComponent* movement = new MovementComponent{ 0.1f,0,64,448, 542,16,32, "CharacterSpriteSheet.png"};
+	MovementComponent* movement = new MovementComponent{ 2.0f,0,64,448, 542,16,32, "CharacterSpriteSheet.png"};
 	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48} };
 	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
 	weapon->AllowCollisionWithTag("Enemy");
@@ -89,21 +91,48 @@ void dae::SoloScene::Initialize() {
 	go->GetTransform()->SetPosition(0, 0, 0);
 	Add(go);
 
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", Vector3{ 48,368,0 }));
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", Vector3{ 368,48,0 }));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", Vector3{ 304,304,0 }));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", Vector3{ 368,368,0 }));
 
 	TextComponent* score = new TextComponent{ "Score: 0", font, Vector3{1.0f,1.0f,1.0f} };
 	m_Score->AddComponent(score);
 	Add(m_Score);
-	m_Score->GetTransform()->Translate(200, 0, 0);
+	m_Score->GetTransform()->SetPosition(200, 0, 0);
 }
 
 void dae::SoloScene::Update(float) {
 	auto& input = InputManager::GetInstance();
 	m_Score->GetComponent<TextComponent>()->SetText("Score: " + std::to_string(PointsManager::GetInstance().GetPoints()));
-	for (int i{}; i < 5; ++i)
-	{
-		if (input.IsActionTriggered(i)) {
-			input.GetCommand(i)->Execute(m_Obj);
+
+	//can't use for loop because that creates issue with my movement
+	if (input.IsActionTriggered(4)) {
+		input.GetCommand(4)->Execute(m_Obj);
+	}
+	if (input.IsActionTriggered(0)) {
+		input.GetCommand(0)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(1)) {
+		input.GetCommand(1)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(2)) {
+		input.GetCommand(2)->Execute(m_Obj);
+	}
+	else if (input.IsActionTriggered(3)) {
+		input.GetCommand(3)->Execute(m_Obj);
+	}
+
+	int i{ 0 };
+	for(auto elements: Locator::GetEnemies()) {
+		if(elements->GetComponent<AIComponent>()->IsDead()) {
+			++i;
 		}
+	}
+	if(i == int(Locator::GetEnemies().size())) {
+		AIComponent::ResetCount();
+		Locator::FlushEnemies();
+		SceneManager::GetInstance().SetActivateScene("EndScene");
 	}
 }
 
