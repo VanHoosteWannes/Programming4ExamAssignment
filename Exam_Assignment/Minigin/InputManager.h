@@ -64,15 +64,15 @@ namespace dae
 		private:
 			std::map<int, InputAction> m_InputActions;
 			std::map<int, std::shared_ptr<Command>> m_Commands;
-			bool m_Playing = true;
 			//no use of shared pointers because it doesnt work for the "GetKeyboardState function
 			BYTE *m_pCurrKeyboardState, *m_pOldKeyboardState, *m_pKeyboardState0, *m_pKeyboardState1;
+			XINPUT_STATE m_OldGamepadState[XUSER_MAX_COUNT], m_CurrGamepadState[XUSER_MAX_COUNT];
 
 			bool m_KeyboardState0Active;
 			bool m_IsInitialized;
-
-			XINPUT_STATE m_OldGamepadState[XUSER_MAX_COUNT], m_CurrGamepadState[XUSER_MAX_COUNT];
 			bool m_ConnectedGamepads[XUSER_MAX_COUNT];
+			bool m_Playing = true;
+
 
 			void UpdateGamepadStates();
 			bool UpdateKeyboardStates();

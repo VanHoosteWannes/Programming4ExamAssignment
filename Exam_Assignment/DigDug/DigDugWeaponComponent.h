@@ -17,7 +17,7 @@ namespace dae {
 		void Update(float deltaTime) override;
 		void Render() override;
 		void Activate();
-
+		void DeactivateAll();
 	private:
 		bool m_Active;
 		float m_AccuSet;

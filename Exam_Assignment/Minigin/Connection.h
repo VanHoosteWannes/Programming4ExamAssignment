@@ -7,7 +7,7 @@ namespace dae {
 	class Connection
 	{
 	public:
-		Connection(std::shared_ptr<Node> pStartNode, std::shared_ptr<Node> pTargetNode) :
+		Connection(Node* pStartNode, Node* pTargetNode) :
 			m_pStartNode(pStartNode), m_pTargetNode(pTargetNode) {}
 		~Connection() = default;
 
@@ -18,17 +18,17 @@ namespace dae {
 		float GetFCost() const { return m_GCost + m_HCost; }
 		void ResetCosts() { m_GCost = 0; m_FCost = 0; m_HCost = 0; }
 
-		std::shared_ptr<Node> GetStartNode() const { return m_pStartNode; }
-		void SetStartNode(std::shared_ptr<Node> pStartNode) { m_pStartNode = pStartNode; }
-		std::shared_ptr<Node> GetEndNode() const { return m_pTargetNode; }
-		void SetEndNode(std::shared_ptr<Node> pEndNode) { m_pTargetNode = pEndNode; }
-		std::shared_ptr<Connection> GetHeadConnection() const { return m_pHeadConnection; }
-		void SetHeadConnection(std::shared_ptr<Connection> pC) { m_pHeadConnection = pC; }
+		Node* GetStartNode() const { return m_pStartNode; }
+		void SetStartNode(Node* pStartNode) { m_pStartNode = pStartNode; }
+		Node* GetEndNode() const { return m_pTargetNode; }
+		void SetEndNode(Node* pEndNode) { m_pTargetNode = pEndNode; }
+		Connection* GetHeadConnection() const { return m_pHeadConnection; }
+		void SetHeadConnection(Connection* pC) { m_pHeadConnection = pC; }
 
 	private:
-		std::shared_ptr<Node> m_pStartNode = nullptr;
-		std::shared_ptr<Node> m_pTargetNode = nullptr;
-		std::shared_ptr<Connection> m_pHeadConnection = nullptr;
+		Node* m_pStartNode = nullptr;
+		Node* m_pTargetNode = nullptr;
+		Connection* m_pHeadConnection = nullptr;
 
 		float m_GCost = 0.f;
 		float m_HCost = 0.f;

@@ -17,11 +17,6 @@ namespace  dae {
 		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
-	private:
-		std::shared_ptr<GameObject> m_ButtonMenu;
-		std::shared_ptr<GameObject> m_ButtonRestart;
-		std::shared_ptr<GameObject> m_ButtonQuit;
-		std::shared_ptr<ButtonManager> m_ButtonManager;
 	};
 }
 

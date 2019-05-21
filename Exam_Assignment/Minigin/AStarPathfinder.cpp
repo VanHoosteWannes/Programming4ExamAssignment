@@ -6,17 +6,16 @@
 
 //Class from gameplay programming
 
-std::vector<dae::Vector2> dae::AStarPathfinder::FindPath(std::shared_ptr<Node> pStartNode,
-	std::shared_ptr<Node> pEndNode, Heuristics heuristicFunction) {
+std::vector<dae::Vector2> dae::AStarPathfinder::FindPath(Node* pStartNode,Node* pEndNode, Heuristics heuristicFunction) {
 
 
 	std::vector<Vector2> vPath;
 
 
-	std::vector<std::shared_ptr<Connection>> openList;
-	std::vector<std::shared_ptr<Connection>> closedList;
+	std::vector<Connection*> openList;
+	std::vector<Connection*> closedList;
 
-	std::shared_ptr<Connection> pCurrentConnection = nullptr;
+	Connection* pCurrentConnection = nullptr;
 
 
 	for (auto c : pStartNode->GetConnections())
@@ -41,14 +40,14 @@ std::vector<dae::Vector2> dae::AStarPathfinder::FindPath(std::shared_ptr<Node> p
 
 		closedList.push_back(pCurrentConnection);
 
-		std::vector<std::shared_ptr<Connection>> vpConnections = {};
+		std::vector<Connection*> vpConnections = {};
 		for (auto element : pCurrentConnection->GetEndNode()->GetConnections()) {
 			vpConnections.push_back(element);
 		}
 
-		auto isEnd = [pEndNode](std::shared_ptr<Connection> element) { return element->GetEndNode() == pEndNode; };
+		auto isEnd = [pEndNode](Connection* element) { return element->GetEndNode() == pEndNode; };
 
-		std::vector<std::shared_ptr<Connection>>::iterator result = std::find_if(vpConnections.begin(), vpConnections.end(), isEnd);
+		std::vector<Connection*>::iterator result = std::find_if(vpConnections.begin(), vpConnections.end(), isEnd);
 
 		if (result != vpConnections.end())
 		{
@@ -94,8 +93,8 @@ std::vector<dae::Vector2> dae::AStarPathfinder::FindPath(std::shared_ptr<Node> p
 	return vPath;
 }
 
-void dae::AStarPathfinder::CalculateCosts(std::shared_ptr<Connection> pC, std::shared_ptr<Node> pStartNode,
-	std::shared_ptr<Node> pTargetNode, Heuristics heuristicFunction) {
+void dae::AStarPathfinder::CalculateCosts(Connection* pC, Node* pStartNode,
+	Node* pTargetNode, Heuristics heuristicFunction) {
 	float currentGCost = 0;
 	if (pC->GetHeadConnection() != nullptr)
 		currentGCost = pC->GetHeadConnection()->GetGCost();

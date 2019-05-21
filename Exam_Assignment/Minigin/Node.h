@@ -9,20 +9,25 @@ namespace dae {
 	public:
 		Node(const Vector2& position)
 			:m_Position(position) {}
-		~Node() = default;
+		~Node(){
+			for (auto element : m_pConnections)
+			{
+				delete element;
+			}
+		};
 
 		const Vector2& GetPosition() const { return m_Position; }
 		void SetPosition(const Vector2& p) { m_Position = p; }
 		bool IsWalkable() const { return m_IsWalkable; }
 		void SetWalkable(bool state) { m_IsWalkable = state; }
 
-		void AddConnection(const std::shared_ptr<Node>& m_pNode)
+		void AddConnection(Node* m_pNode)
 		{
-			std::shared_ptr<Connection> newConnection = std::make_shared<Connection>(std::make_shared<Node>(*this), m_pNode);
+			Connection* newConnection = new Connection(this, m_pNode);
 			m_pConnections.push_back(newConnection);
 		}
 
-		std::vector<std::shared_ptr<Connection>> GetConnections() const
+		std::vector<Connection*> GetConnections() const
 		{
 			return m_pConnections;
 		}
@@ -37,7 +42,7 @@ namespace dae {
 
 	private:
 		//--- Datamembers ---
-		std::vector<std::shared_ptr<Connection>> m_pConnections;
+		std::vector<Connection*> m_pConnections;
 		Vector2 m_Position = Vector2{0,0};
 		bool m_IsWalkable = true;
 	};

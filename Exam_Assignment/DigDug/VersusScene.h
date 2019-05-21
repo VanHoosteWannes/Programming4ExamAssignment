@@ -15,14 +15,13 @@ namespace dae {
 		VersusScene& operator=(const VersusScene& other) = delete;
 		VersusScene& operator=(VersusScene&& other) noexcept = delete;
 
+		void ReInitialize();
 		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
+
 	private:
-		std::shared_ptr<GameObject> m_Obj;
-		std::shared_ptr<GameObject> m_Obj2;
-		std::shared_ptr<GameObject> m_Level;
-		std::shared_ptr<GameObject> m_Score;
+		int m_Level = 1;
 	};
 }
 

@@ -18,15 +18,7 @@
 
 dae::StartScene::StartScene()
 	:Scene("StartScene")
-,m_Song(std::make_unique<SoundEffect>("../Data/Sounds/Death_screen.ogg"))
 {
-	m_ButtonManager = std::make_shared<ButtonManager>();
-	m_ButtonSolo = std::make_shared<GameObject>();
-	m_ButtonCoop = std::make_shared<GameObject>();
-	m_ButtonVersus = std::make_shared<GameObject>();
-
-	m_Song->SetVolume(10);
-	m_Song->Play(true);
 }
 
 void dae::StartScene::Initialize() {
@@ -40,7 +32,7 @@ void dae::StartScene::Initialize() {
 
 	input.AddInputAction(InputAction{ 1,KeyState::Down, 'S', XINPUT_GAMEPAD_DPAD_DOWN, GamepadIndex::PlayerOne });
 
-	input.AddInputAction(InputAction{ 2,KeyState::Released, 'P', XINPUT_GAMEPAD_A, GamepadIndex::PlayerOne });
+	input.AddInputAction(InputAction{ 2,KeyState::Released, 'P', XINPUT_GAMEPAD_START, GamepadIndex::PlayerOne });
 	std::shared_ptr<ButtonActivateCommand> press = std::make_shared<ButtonActivateCommand>();
 	input.SetCommand(2, press);
 
@@ -49,31 +41,38 @@ TextureComponent* texture = new TextureComponent{ "Level.png" };
 go->AddComponent(texture);
 Add(go);
 
+auto buttonManager = std::make_shared<ButtonManager>();
+auto buttonSolo = std::make_shared<GameObject>();
+auto buttonCoop = std::make_shared<GameObject>();
+auto buttonVersus = std::make_shared<GameObject>();
+
+
 auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-ButtonComponent* button = new ButtonComponent("Solo", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("SoloScene");}, Vector3{ 180.0f,144.0f,0 });
-m_ButtonSolo->AddComponent(button);
-m_ButtonManager->AddButton(m_ButtonSolo);
-Add(m_ButtonSolo);
+ButtonComponent* button = new ButtonComponent("Solo", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("SoloScene"); }, Vector3{ 180.0f,144.0f,0 });
+buttonSolo->AddComponent(button);
+buttonManager->AddButton(buttonSolo);
+Add(buttonSolo);
 
 ButtonComponent* button1 = new ButtonComponent("Co-op", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("CoopScene");}, Vector3{ 180.0f,288.0f,0 });
-m_ButtonCoop->AddComponent(button1);
-m_ButtonManager->AddButton(m_ButtonCoop);
-Add(m_ButtonCoop);
+buttonCoop->AddComponent(button1);
+buttonManager->AddButton(buttonCoop);
+Add(buttonCoop);
 
 ButtonComponent* button2 = new ButtonComponent("Versus", font, Vector3{ 0.0f,0.0f,0.0f }, []() {SceneManager::GetInstance().SetActivateScene("VersusScene");}, Vector3{ 180.0f,432.0f,0 });
-m_ButtonVersus->AddComponent(button2);
-m_ButtonManager->AddButton(m_ButtonVersus);
-Add(m_ButtonVersus);
+buttonVersus->AddComponent(button2);
+buttonManager->AddButton(buttonVersus);
+Add(buttonVersus);
 
+Locator::ProvideButtonManager(buttonManager);
 }
 
 void dae::StartScene::Update(float deltaTime) {
 	auto& input = InputManager::GetInstance();
-	auto activeButton = m_ButtonManager->GetActiveButton();
+	auto activeButton = Locator::GetButtonManager()->GetActiveButton();
 	if(input.IsActionTriggered(2)) {
 		input.GetCommand(2)->Execute(activeButton);
 	}
-	m_ButtonManager->Update(deltaTime);
+	Locator::GetButtonManager()->Update(deltaTime);
 }
 
 void dae::StartScene::Render() {

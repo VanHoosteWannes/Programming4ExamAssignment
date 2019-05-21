@@ -13,15 +13,15 @@ dae::DigDugWeaponComponent::DigDugWeaponComponent(const std::string& filePath, b
 	}
 	if (friendly)
 	{
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(64.0f, 30.0f, "Weapon", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(64.0f, 30.0f, "Weapon", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 64.0f, "Weapon", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 64.0f, "Weapon", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(50.0f, 30.0f, "Weapon", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(50.0f, 30.0f, "Weapon", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 50.0f, "Weapon", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 50.0f, "Weapon", 16));
 	}else {
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(64.0f, 30.0f, "Fire", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(64.0f, 30.0f, "Fire", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 64.0f, "Fire", 16));
-		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 64.0f, "Fire", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(50.0f, 30.0f, "Fire", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(50.0f, 30.0f, "Fire", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 50.0f, "Fire", 16));
+		m_CollisionBoxes.push_back(std::make_shared<CollisionComponent>(30.0f, 50.0f, "Fire", 16));
 	}
 	for(auto element : m_CollisionBoxes) {
 		element->SetActive(false);
@@ -91,6 +91,12 @@ void dae::DigDugWeaponComponent::Activate() {
 	}
 	int movementID = int(m_pGameObject->GetComponent<MovementComponent>()->GetDirection());
 	m_CollisionBoxes[movementID]->SetActive(true);
+}
+
+void dae::DigDugWeaponComponent::DeactivateAll() {
+	for(auto element : m_CollisionBoxes) {
+		element->SetActive(false);
+	}
 }
 
 

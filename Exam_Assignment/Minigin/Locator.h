@@ -1,5 +1,6 @@
 #pragma once
 #include "InputManager.h"
+#include "ButtonManager.h"
 
 namespace dae {
 	class Locator //class based off Week7 locator
@@ -9,8 +10,13 @@ namespace dae {
 
 		static std::shared_ptr<GameObject>& GetPlayerOne() { return m_Player1; }
 		static std::shared_ptr<GameObject>& GetPlayerTwo() { return m_Player2; }
+		static std::shared_ptr<ButtonManager>& GetButtonManager() { return m_ButtonManager; }
 		static void FlushEnemies() { m_Enemies.clear(); }
 		static std::vector<std::shared_ptr<GameObject>>& GetEnemies(){ return m_Enemies; }
+
+		static void ProvideButtonManager(const std::shared_ptr<ButtonManager>& buttonManager) {
+			m_ButtonManager = buttonManager;
+		}
 
 		static void ProvideEnemy(const std::shared_ptr<GameObject>& enemy) {
 			m_Enemies.push_back(enemy);
@@ -43,6 +49,7 @@ namespace dae {
 		static std::shared_ptr<GameObject> m_Player1;
 		static std::shared_ptr<GameObject> m_Player2;
 		static std::shared_ptr<GameObject> m_NullGameObject;
+		static std::shared_ptr<ButtonManager> m_ButtonManager;
 		static std::vector<std::shared_ptr<GameObject>> m_Enemies;
 	};
 }

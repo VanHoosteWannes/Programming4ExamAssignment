@@ -14,7 +14,7 @@ namespace dae {
 		EnemySpawner() = default;
 		~EnemySpawner() = default;
 
-		static std::shared_ptr<GameObject> SpawnEnemy(const std::string& spritePath, Vector3 spawnpoint) {
+		static std::shared_ptr<GameObject> SpawnEnemy(const std::string& spritePath, int col, int row) {
 			std::shared_ptr<GameObject> go = std::make_shared<GameObject>();
 			AIComponent* aiComp = new AIComponent{};
 			CollisionComponent* coll = new CollisionComponent{ 30,30,"Enemy", 16 };
@@ -27,7 +27,7 @@ namespace dae {
 			go->AddComponent(aiComp);
 			go->AddComponent(coll);
 			go->AddComponent(sprite);
-			go->GetTransform()->SetPosition(spawnpoint.x, spawnpoint.y, spawnpoint.z);
+			go->GetTransform()->SetPosition((col* 32.0f) + 16.0f, (row* 32.0f) + 16.0f, 0);
 
 			Locator::ProvideEnemy(go);
 			return go;

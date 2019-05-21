@@ -45,5 +45,21 @@ namespace dae {
 			Locator::GetEnemies()[idx]->GetComponent<AIComponent>()->Idle();
 		}
 	};
+
+	class CreatePathAction : public Action
+	{
+	public:
+		void Invoke(int idx, float) override {
+			Locator::GetEnemies()[idx]->GetComponent<AIComponent>()->CalculatePath();
+		}
+	};
+
+	class RunToPlayerAction : public Action
+	{
+	public:
+		void Invoke(int idx, float) override {
+			Locator::GetEnemies()[idx]->GetComponent<AIComponent>()->RunToPlayer();
+		}
+	};
 }
 

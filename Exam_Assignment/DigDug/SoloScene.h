@@ -13,13 +13,12 @@ namespace dae {
 		SoloScene& operator=(const SoloScene& other) = delete;
 		SoloScene& operator=(SoloScene&& other) noexcept = delete;
 
+		void ReInitialize();
 		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
 	private:
-		std::shared_ptr<GameObject> m_Obj;
-		std::shared_ptr<GameObject> m_Level;
-		std::shared_ptr<GameObject> m_Score;
+		int m_Level = 1;
 	};
 }
 

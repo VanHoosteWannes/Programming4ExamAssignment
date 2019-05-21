@@ -27,13 +27,13 @@ namespace dae {
 		int m_Cols;
 		float m_TileSize;
 		float m_TextureOffset;
-		Vector3 m_Position;
 		float m_EndPosition;
 		bool m_IsFalling;
 		bool m_CheckRest;
 		bool m_IsUnderneath = true;
 		bool m_HasFallen = false;
 		bool m_Broken = false;
+		Vector3 m_Position;
 		std::vector<std::shared_ptr<Block>> m_Blocks;
 		std::vector<std::shared_ptr<GameObject>> m_Diggers;
 	};

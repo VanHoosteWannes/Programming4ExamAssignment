@@ -52,7 +52,7 @@ void dae::FallingComponent::Update(float) {
 				if (m_IsUnderneath)
 				{
 					for (auto element : m_Diggers) {
-						if (element->GetTransform()->GetPosition().x >= m_Position.x - 30 && element->GetTransform()->GetPosition().x <= m_Position.x + 30) {
+						if (element->GetTransform()->GetPosition().x >= m_Position.x - 30 && element->GetTransform()->GetPosition().x <= m_Position.x + 30 && element->GetTransform()->GetPosition().y >= m_Position.y) {
 							m_IsUnderneath = true;
 							break;
 						}

@@ -6,14 +6,14 @@ void dae::Scene::RootInitialize() {
 	Initialize();
 }
 void dae::Scene::RootUpdate(float deltaTime) {
-	for (auto gameObject : mObjects)
+	for (auto gameObject : m_Objects)
 	{
 		gameObject->Update(deltaTime);
 	}
 	Update(deltaTime);
 }
 void dae::Scene::RootRender() {
-	for (const auto gameObject : mObjects)
+	for (const auto gameObject : m_Objects)
 	{
 		gameObject->Render();
 	}
@@ -30,7 +30,7 @@ dae::Scene::~Scene() = default;
 
 void dae::Scene::Add(const std::shared_ptr<SceneObject>& object)
 {
-	mObjects.push_back(object);
+	m_Objects.push_back(object);
 }
 
 

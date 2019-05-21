@@ -14,13 +14,12 @@ namespace dae {
 		CoopScene& operator=(const CoopScene& other) = delete;
 		CoopScene& operator=(CoopScene&& other) noexcept = delete;
 
+		void ReInitialize();
 		void Initialize() override;
 		void Update(float deltaTime) override;
 		void Render() override;
 	private:
-		std::shared_ptr<GameObject> m_Obj;
-		std::shared_ptr<GameObject> m_Obj2;
-		std::shared_ptr<GameObject> m_Level;
+		int m_Level = 1;
 	};
 }
 

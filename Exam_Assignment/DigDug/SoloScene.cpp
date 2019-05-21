@@ -21,9 +21,55 @@
 
 dae::SoloScene::SoloScene()
 	:Scene("SoloScene") {
-	m_Obj = std::make_shared<GameObject>();
-	m_Level = std::make_shared<GameObject>();
-	m_Score = std::make_shared<GameObject>();
+}
+
+void dae::SoloScene::ReInitialize() {
+	auto go = std::make_shared<GameObject>();
+	TextureComponent* texture = new TextureComponent{ "Level.png" };
+	go->AddComponent(texture);
+	Add(go);
+
+
+	DigDugMapComponent* map = new DigDugMapComponent{ "level" + std::to_string(m_Level) + ".bin", 15,14,32,0,64,16 };
+	auto level = std::make_shared<GameObject>();
+	level->AddComponent(map);
+	Add(level);
+
+	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+
+
+	MovementComponent* movement = new MovementComponent{ 2.0f,0,64,448, 542,16,32, "CharacterSpriteSheet.png" };
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48} };
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
+	weapon->AllowCollisionWithTag("Enemy");
+	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player",16 };
+	collision->AllowCollisionWithTag("Enemy");
+	collision->AllowCollisionWithTag("Rock");
+
+	auto player1 = std::make_shared<GameObject>();
+
+	player1->AddComponent(movement);
+	player1->AddComponent(health);
+	player1->AddComponent(weapon);
+	player1->AddComponent(collision);
+	player1->GetTransform()->SetPosition(48, 48, 0);
+	Add(player1);
+
+	Locator::ProvidePlayerOne(player1);
+
+	map->AddDigger(player1);
+
+	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	go = std::make_shared<GameObject>();
+	FPSComponent* comp = new FPSComponent{ font, Vector3{255,255,0} };
+	go->AddComponent(comp);
+	go->GetTransform()->SetPosition(0, 0, 0);
+	Add(go);
+
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", 12, 14));
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", 2, 12));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 10, 7));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 7, 4));
 }
 
 void dae::SoloScene::Initialize() {
@@ -51,18 +97,16 @@ void dae::SoloScene::Initialize() {
 	input.SetCommand(4, shoot);
 
 
-	//std::shared_ptr<Input> m_Player2 = std::make_shared<Input>();
-	//Locator::ProvidePlayerTwoInput(m_Player2);
-
 	auto go = std::make_shared<GameObject>();
 	TextureComponent* texture = new TextureComponent{ "Level.png" };
 	go->AddComponent(texture);
 	Add(go);
 
 
-	DigDugMapComponent* map = new DigDugMapComponent{ 15,14,32,0,64,16 };
-	m_Level->AddComponent(map);
-	Add(m_Level);
+	DigDugMapComponent* map = new DigDugMapComponent{"level" + std::to_string(m_Level)+ ".bin", 15,14,32,0,64,16 };
+	auto level = std::make_shared<GameObject>();
+	level->AddComponent(map);
+	Add(level);
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
 
@@ -75,14 +119,18 @@ void dae::SoloScene::Initialize() {
 	collision->AllowCollisionWithTag("Enemy");
 	collision->AllowCollisionWithTag("Rock");
 
-	m_Obj->AddComponent(movement);
-	m_Obj->AddComponent(health);
-	m_Obj->AddComponent(weapon);
-	m_Obj->AddComponent(collision);
-	m_Obj->GetTransform()->SetPosition(48, 48, 0);
-	Add(m_Obj);
+	auto player1 = std::make_shared<GameObject>();
 
-	map->AddDigger(m_Obj);
+	player1->AddComponent(movement);
+	player1->AddComponent(health);
+	player1->AddComponent(weapon);
+	player1->AddComponent(collision);
+	player1->GetTransform()->SetPosition(48, 48, 0);
+	Add(player1);
+
+	Locator::ProvidePlayerOne(player1);
+
+	map->AddDigger(player1);
 
 	font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	go = std::make_shared<GameObject>();
@@ -91,36 +139,31 @@ void dae::SoloScene::Initialize() {
 	go->GetTransform()->SetPosition(0, 0, 0);
 	Add(go);
 
-	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", Vector3{ 48,368,0 }));
-	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", Vector3{ 368,48,0 }));
-	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", Vector3{ 304,304,0 }));
-	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", Vector3{ 368,368,0 }));
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", 1, 11));
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png",11, 4));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png",9,9));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 11,11));
 
-	TextComponent* score = new TextComponent{ "Score: 0", font, Vector3{1.0f,1.0f,1.0f} };
-	m_Score->AddComponent(score);
-	Add(m_Score);
-	m_Score->GetTransform()->SetPosition(200, 0, 0);
 }
 
 void dae::SoloScene::Update(float) {
 	auto& input = InputManager::GetInstance();
-	m_Score->GetComponent<TextComponent>()->SetText("Score: " + std::to_string(PointsManager::GetInstance().GetPoints()));
 
 	//can't use for loop because that creates issue with my movement
 	if (input.IsActionTriggered(4)) {
-		input.GetCommand(4)->Execute(m_Obj);
+		input.GetCommand(4)->Execute(Locator::GetPlayerOne());
 	}
 	if (input.IsActionTriggered(0)) {
-		input.GetCommand(0)->Execute(m_Obj);
+		input.GetCommand(0)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(1)) {
-		input.GetCommand(1)->Execute(m_Obj);
+		input.GetCommand(1)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(2)) {
-		input.GetCommand(2)->Execute(m_Obj);
+		input.GetCommand(2)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(3)) {
-		input.GetCommand(3)->Execute(m_Obj);
+		input.GetCommand(3)->Execute(Locator::GetPlayerOne());
 	}
 
 	int i{ 0 };
@@ -129,13 +172,24 @@ void dae::SoloScene::Update(float) {
 			++i;
 		}
 	}
+
 	if(i == int(Locator::GetEnemies().size())) {
+		++m_Level;
 		AIComponent::ResetCount();
 		Locator::FlushEnemies();
-		SceneManager::GetInstance().SetActivateScene("EndScene");
+		ClearScene();
+		ReInitialize();
 	}
+
+	if((i == int(Locator::GetEnemies().size()) && m_Level > 2) || Locator::GetPlayerOne()->GetComponent<DigDugHealthComponent>()->GetLives() <= 0) {
+	m_Level = 1;
+	AIComponent::ResetCount();
+	Locator::FlushEnemies();
+	ClearScene();
+	SceneManager::GetInstance().SetActivateScene("EndScene");
+}
 }
 
 void dae::SoloScene::Render() {
-
+	PointsManager::GetInstance().Render();
 }

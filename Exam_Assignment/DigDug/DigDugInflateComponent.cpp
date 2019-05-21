@@ -16,7 +16,7 @@ void dae::DigDugInflateComponent::Update(float deltaTime) {
 	{
 		m_AccuSec += deltaTime;
 		if (m_AccuSec >= m_CheckTime) {
-			if (m_pGameObject->GetComponent<CollisionComponent>()->GetColliding() /*&& m_pGameObject->GetComponent<CollisionComponent>()->GetLastCollidedTag() == "Weapon"*/) {
+			if (m_pGameObject->GetComponent<CollisionComponent>()->GetColliding() && m_pGameObject->GetComponent<CollisionComponent>()->GetLastCollidedTag() == "Weapon") {
 				++m_InflateStage;
 				m_pGameObject->GetComponent<MovementComponent>()->LockMovement(true);
 				m_pGameObject->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 2 + m_InflateStage, 2 + m_InflateStage, 0, 2);

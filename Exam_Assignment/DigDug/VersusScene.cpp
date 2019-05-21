@@ -16,13 +16,86 @@
 #include "PointsManager.h"
 #include "DigDugInflateComponent.h"
 #include "DigDugGhostComponent.h"
+#include "EnemySpawner.h"
 
 dae::VersusScene::VersusScene()
 	:Scene("VersusScene") {
-	m_Obj = std::make_shared<GameObject>();
-	m_Obj2 = std::make_shared<GameObject>();
-	m_Level = std::make_shared<GameObject>();
-	m_Score = std::make_shared<GameObject>();
+}
+
+void dae::VersusScene::ReInitialize() {
+	auto go = std::make_shared<GameObject>();
+	TextureComponent* texture = new TextureComponent{ "Level.png" };
+	go->AddComponent(texture);
+	Add(go);
+
+	auto level = std::make_shared<GameObject>();
+	DigDugMapComponent* map = new DigDugMapComponent{ "level" + std::to_string(m_Level) + ".bin",15, 14,32, 0,64,16 };
+	level->AddComponent(map);
+	Add(level);
+
+
+	MovementComponent* movement = new MovementComponent{ 2.0f,0,64,448, 542,16,32,"CharacterSpriteSheet.png" };
+
+	MovementComponent* movement2 = new MovementComponent{ 2.0f,0,64,448, 542, 16,32,"FygarSpriteSheet.png" };
+	DigDugHealthComponent* health = new DigDugHealthComponent{ 3, Vector3{10,544,0}, "LifeP1.png", Vector3{48,48,0} };
+
+	DigDugHealthComponent* health2 = new DigDugHealthComponent{ 3, Vector3{320,544,0}, "LifeFygar.png",Vector3{368,48,0} };
+
+	DigDugWeaponComponent* weapon = new DigDugWeaponComponent{ "Weapon.png",true };
+	weapon->AllowCollisionWithTag("Enemy");
+
+	DigDugWeaponComponent* weapon2 = new DigDugWeaponComponent{ "Fire.png",false };
+	weapon2->AllowCollisionWithTag("Player");
+
+	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player",16 };
+	collision->AllowCollisionWithTag("Rock");
+	collision->AllowCollisionWithTag("Fire");
+	collision->AllowCollisionWithTag("Enemy");
+
+	CollisionComponent* enemyCollision = new CollisionComponent{ 30,30, "Enemy",16 };
+	enemyCollision->AllowCollisionWithTag("Rock");
+	enemyCollision->AllowCollisionWithTag("Weapon");
+	enemyCollision->AllowCollisionWithTag("Player");
+
+	DigDugInflateComponent* inflateComp = new DigDugInflateComponent{};
+	DigDugGhostComponent* ghostComp = new DigDugGhostComponent{ 32,14 };
+
+
+	auto player1 = std::make_shared<GameObject>();
+	player1->AddComponent(movement);
+	player1->AddComponent(health);
+	player1->AddComponent(weapon);
+	player1->AddComponent(collision);
+	player1->GetTransform()->SetPosition(48, 48, 0);
+	Add(player1);
+
+	auto player2 = std::make_shared<GameObject>();
+	player2->AddComponent(movement2);
+	player2->AddComponent(health2);
+	player2->AddComponent(ghostComp);
+	player2->AddComponent(inflateComp);
+	player2->AddComponent(weapon2);
+	player2->AddComponent(enemyCollision);
+	player2->GetTransform()->SetPosition(368, 48, 0);
+	Add(player2);
+
+	Locator::ProvidePlayerOne(player1);
+	Locator::ProvidePlayerTwo(player2);
+
+	map->AddDigger(player1);
+
+
+	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	go = std::make_shared<GameObject>();
+	FPSComponent* comp = new FPSComponent{ font, Vector3{255,255,0} };
+	go->AddComponent(comp);
+	go->GetTransform()->SetPosition(0, 0, 0);
+	Add(go);
+
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", 12, 14));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 10, 7));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 7, 4));
+
 }
 
 void dae::VersusScene::Initialize() {
@@ -77,10 +150,10 @@ void dae::VersusScene::Initialize() {
 	go->AddComponent(texture);
 	Add(go);
 
-
-	DigDugMapComponent* map = new DigDugMapComponent{15, 14,32, 0,64,16 };
-	m_Level->AddComponent(map);
-	Add(m_Level);
+	auto level = std::make_shared<GameObject>() ;
+	DigDugMapComponent* map = new DigDugMapComponent{ "level" + std::to_string(m_Level) + ".bin",15, 14,32, 0,64,16 };
+	level->AddComponent(map);
+	Add(level);
 
 
 	MovementComponent* movement = new MovementComponent{ 2.0f,0,64,448, 542,16,32,"CharacterSpriteSheet.png" };
@@ -97,35 +170,41 @@ void dae::VersusScene::Initialize() {
 	weapon2->AllowCollisionWithTag("Player");
 
 	CollisionComponent* collision = new CollisionComponent{ 30,30, "Player",16 };
-	//collision->AllowCollisionWithTag("Enemy");
 	collision->AllowCollisionWithTag("Rock");
 	collision->AllowCollisionWithTag("Fire");
+	collision->AllowCollisionWithTag("Enemy");
 
 	CollisionComponent* enemyCollision = new CollisionComponent{ 30,30, "Enemy",16 };
-	//enemyCollision->AllowCollisionWithTag("Player");
 	enemyCollision->AllowCollisionWithTag("Rock");
 	enemyCollision->AllowCollisionWithTag("Weapon");
+	enemyCollision->AllowCollisionWithTag("Player");
 
 	DigDugInflateComponent* inflateComp = new DigDugInflateComponent{};
 	DigDugGhostComponent* ghostComp = new DigDugGhostComponent{ 32,14 };
 
-	m_Obj->AddComponent(movement);
-	m_Obj->AddComponent(health);
-	m_Obj->AddComponent(weapon);
-	m_Obj->AddComponent(collision);
-	m_Obj->GetTransform()->SetPosition(48, 48, 0);
-	Add(m_Obj);
 
-	m_Obj2->AddComponent(movement2);
-	m_Obj2->AddComponent(health2);
-	m_Obj2->AddComponent(ghostComp);
-	m_Obj2->AddComponent(inflateComp);
-	m_Obj2->AddComponent(weapon2);
-	m_Obj2->AddComponent(enemyCollision);
-	m_Obj2->GetTransform()->SetPosition(368, 48, 0);
-	Add(m_Obj2);
-	
-	map->AddDigger(m_Obj);
+	auto player1 = std::make_shared<GameObject>();
+	player1->AddComponent(movement);
+	player1->AddComponent(health);
+	player1->AddComponent(weapon);
+	player1->AddComponent(collision);
+	player1->GetTransform()->SetPosition(48, 48, 0);
+	Add(player1);
+
+	auto player2 = std::make_shared<GameObject>();
+	player2->AddComponent(movement2);
+	player2->AddComponent(health2);
+	player2->AddComponent(ghostComp);
+	player2->AddComponent(inflateComp);
+	player2->AddComponent(weapon2);
+	player2->AddComponent(enemyCollision);
+	player2->GetTransform()->SetPosition(368, 48, 0);
+	Add(player2);
+
+	Locator::ProvidePlayerOne(player1);
+	Locator::ProvidePlayerTwo(player2);
+
+	map->AddDigger(player1);
 
 
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
@@ -135,51 +214,76 @@ void dae::VersusScene::Initialize() {
 	go->GetTransform()->SetPosition(0, 0, 0);
 	Add(go);
 
-	TextComponent* score = new TextComponent{ "Score: 0", font, Vector3{1.0f,1.0f,1.0f} };
-	m_Score->AddComponent(score);
-	Add(m_Score);
-	m_Score->GetTransform()->Translate(200, 0, 0);
+
+	Add(EnemySpawner::SpawnEnemy("FygarSpriteSheet.png", 1, 11));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 9, 9));
+	Add(EnemySpawner::SpawnEnemy("PookaSpriteSheet.png", 11, 11));
+
+
 }
 
 void dae::VersusScene::Update(float) {
-	m_Score->GetComponent<TextComponent>()->SetText("Score: " + std::to_string(PointsManager::GetInstance().GetPoints()));
 
 	auto& input = InputManager::GetInstance();
 
 	if (input.IsActionTriggered(4)) {
-		input.GetCommand(4)->Execute(m_Obj);
+		input.GetCommand(4)->Execute(Locator::GetPlayerOne());
 	}
 	if (input.IsActionTriggered(0)) {
-		input.GetCommand(0)->Execute(m_Obj);
+		input.GetCommand(0)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(1)) {
-		input.GetCommand(1)->Execute(m_Obj);
+		input.GetCommand(1)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(2)) {
-		input.GetCommand(2)->Execute(m_Obj);
+		input.GetCommand(2)->Execute(Locator::GetPlayerOne());
 	}
 	else if (input.IsActionTriggered(3)) {
-		input.GetCommand(3)->Execute(m_Obj);
+		input.GetCommand(3)->Execute(Locator::GetPlayerOne());
 	}
 
 	if (input.IsActionTriggered(9)) {
-		input.GetCommand(9)->Execute(m_Obj2);
+		input.GetCommand(9)->Execute(Locator::GetPlayerTwo());
 	}
 
 	if (input.IsActionTriggered(5)) {
-		input.GetCommand(5)->Execute(m_Obj2);
+		input.GetCommand(5)->Execute(Locator::GetPlayerTwo());
 	}
 	else if (input.IsActionTriggered(6)) {
-		input.GetCommand(6)->Execute(m_Obj2);
+		input.GetCommand(6)->Execute(Locator::GetPlayerTwo());
 	}
 	else if (input.IsActionTriggered(7)) {
-		input.GetCommand(7)->Execute(m_Obj2);
+		input.GetCommand(7)->Execute(Locator::GetPlayerTwo());
 	}
 	else if (input.IsActionTriggered(8)) {
-		input.GetCommand(8)->Execute(m_Obj2);
+		input.GetCommand(8)->Execute(Locator::GetPlayerTwo());
+	}
+
+
+	int i{ 0 };
+	for (auto elements : Locator::GetEnemies()) {
+		if (elements->GetComponent<AIComponent>()->IsDead()) {
+			++i;
+		}
+	}
+
+	if (i == int(Locator::GetEnemies().size()) && Locator::GetPlayerTwo()->GetComponent<DigDugHealthComponent>()->GetLives() <= 0) {
+		++m_Level;
+		AIComponent::ResetCount();
+		Locator::FlushEnemies();
+		ClearScene();
+		ReInitialize();
+	}
+
+	if ( m_Level > 2 || Locator::GetPlayerOne()->GetComponent<DigDugHealthComponent>()->GetLives() <= 0)  {
+		m_Level = 1;
+		AIComponent::ResetCount();
+		Locator::FlushEnemies();
+		ClearScene();
+		SceneManager::GetInstance().SetActivateScene("EndScene");
 	}
 }
 
 void dae::VersusScene::Render() {
-
+	PointsManager::GetInstance().Render();
 }

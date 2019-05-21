@@ -6,7 +6,7 @@ namespace dae {
 	class DigDugMapComponent final :public MapComponent
 	{
 	public:
-		DigDugMapComponent(int rows, int cols, float tileSize, float startPositionX, float startPositionY, float textureOffset);
+		DigDugMapComponent(const std::string& filePath, int rows, int cols, float tileSize, float startPositionX, float startPositionY, float textureOffset);
 		virtual ~DigDugMapComponent() = default;
 		DigDugMapComponent(const MapComponent& other) = delete;
 		DigDugMapComponent(DigDugMapComponent&& other) noexcept = delete;

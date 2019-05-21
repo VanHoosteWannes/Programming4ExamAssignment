@@ -5,14 +5,17 @@
 #include "Renderer.h"
 #include "TransformComponent.h"
 
-dae::DigDugMapComponent::DigDugMapComponent(int rows, int cols, float tileSize, float startPositionX,
+dae::DigDugMapComponent::DigDugMapComponent(const std::string& filePath, int rows, int cols, float tileSize, float startPositionX,
 	float startPositionY, float textureOffset)
 	:MapComponent(rows,cols,tileSize,startPositionX,startPositionY,textureOffset)
 {
-	BinaryReader reader{ "../Data/Levels/level2.bin" };
+	BinaryReader reader{ "../Data/Levels/" + filePath };
 	for (int i{}; i < rows * cols; ++i) {
 		if (reader.Read<bool>() == true) {
 			m_Blocks[i]->isPassed = true;
+		}
+		else {
+			m_Blocks[i]->isPassed = false;
 		}
 	}
 	reader.CloseFile();

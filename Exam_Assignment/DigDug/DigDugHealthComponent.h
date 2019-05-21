@@ -15,14 +15,16 @@ namespace dae {
 		void Render() override;
 		void RemoveLife();
 		Vector3 GetSpawnPoint() { return m_RespawnPoint; }
+		int GetLives() { return m_Lives; }
+		void SetLives(int lives) { m_Lives = lives; }
 	;	private:
 		std::vector<std::shared_ptr<TextureComponent>> m_LifeTextures;
-		Vector3 m_StartPos;
-		bool m_IsDying = false;
 		float m_DieTime;
 		float m_AccuSec;
+		Vector3 m_StartPos;
 		Vector3 m_RespawnPoint;
-		float m_Lives = 3;
+		bool m_IsDying = false;
+		int m_Lives = 3;
 	};
 }
 

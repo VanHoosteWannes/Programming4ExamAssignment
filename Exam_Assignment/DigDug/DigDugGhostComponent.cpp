@@ -15,7 +15,7 @@ dae::DigDugGhostComponent::DigDugGhostComponent(int gridSize, int cols)
 
 void dae::DigDugGhostComponent::Update(float) {
 	int x = int(m_pGameObject->GetTransform()->GetPosition().x) / m_GridSize;
-	int y = int(m_pGameObject->GetTransform()->GetPosition().y - 64) / m_GridSize;
+	int y = int(m_pGameObject->GetTransform()->GetPosition().y - 78) / m_GridSize;
 
 	if(!MapComponent::GetBlocks()[y * m_Cols + x]->isPassed) {
 		if(!m_pGameObject->GetComponent<DigDugInflateComponent>()->Inflated())

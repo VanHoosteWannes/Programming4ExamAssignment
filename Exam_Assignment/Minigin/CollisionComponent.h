@@ -25,6 +25,7 @@ namespace dae {
 		bool GetColliding() { return m_IsColliding; }
 		std::string GetTag() { return m_Tag; }
 		std::string GetLastCollidedTag() { return m_CollidingTag; }
+		static void ClearCollisions() { m_Colliders.clear(); }
 		void Render() override;
 		void Update(float deltaTime) override;
 		void Update(float posX, float posY);
@@ -32,11 +33,11 @@ namespace dae {
 	private:
 		void CheckCollisionWithTags();
 		bool m_IsColliding = false;
+		bool m_Active = true;
+		int m_TextureOffset;
 		std::string m_Tag;
 		std::string m_CollidingTag;
-		bool m_Active = true;
 		Rectangle m_Rect;
-		int m_TextureOffset;
 		static std::multimap<std::string, CollisionComponent*> m_Colliders;
 		std::vector<std::string> m_CollidingTags;
 	};

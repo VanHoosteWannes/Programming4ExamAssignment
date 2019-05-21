@@ -22,14 +22,18 @@ void dae::DigDugHealthComponent::Update(float elapsedSec) {
 	if (!m_IsDying)
 	{
 		auto coll = m_pGameObject->GetComponent<CollisionComponent>();
-		if (coll->GetColliding() && coll->GetLastCollidedTag() != "Weapon") {
+		if (coll->GetColliding() && coll->GetLastCollidedTag() != "Weapon" && coll->GetTag() != "Enemy") {
 			RemoveLife();
 			m_pGameObject->GetComponent<MovementComponent>()->LockMovement(true);
 			m_pGameObject->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 5, 6, 2);
 
-			if(coll->GetLastCollidedTag() == "Rock" && coll->GetTag() == "Enemy") {
-				PointsManager::GetInstance().AddPoints(1000);
-			}
+			m_IsDying = true;
+		}
+		if (coll->GetColliding() && coll->GetLastCollidedTag() == "Rock" && coll->GetTag() == "Enemy") {
+			PointsManager::GetInstance().AddPoints(1000);
+			RemoveLife();
+			m_pGameObject->GetComponent<MovementComponent>()->LockMovement(true);
+			m_pGameObject->GetComponent<MovementComponent>()->SetSpriteInfo(7, 7, 0, 5, 6, 2);
 			m_IsDying = true;
 		}
 	}
@@ -44,7 +48,8 @@ void dae::DigDugHealthComponent::Update(float elapsedSec) {
 		}
 	}
 	if(m_Lives == 0) {
-		SceneManager::GetInstance().SetActivateScene("EndScene");
+		m_pGameObject->GetTransform()->SetPosition(1000, 0, 0);
+		m_pGameObject->GetComponent<MovementComponent>()->LockMovement(true);
 	}
 }
 

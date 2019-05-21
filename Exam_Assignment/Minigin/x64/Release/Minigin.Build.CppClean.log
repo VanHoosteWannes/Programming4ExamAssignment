@@ -1,6 +1,7 @@
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.pch
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.pdb
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\miniginpch.obj
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\soundeffect.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\scenemanager.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\scene.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\fallingcomponent.obj
@@ -11,7 +12,6 @@ c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engin
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\logger.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\locator.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\inputmanager.obj
-c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\healthcomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\gameobject.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\fpscomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\font.obj
@@ -27,42 +27,10 @@ c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engin
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\textcomponent.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\statemachine.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\spritecomponent.obj
-c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\soundeffect.obj
 c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\x64\release\minigin.lib
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\astarpathfinder.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\binaryreader.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\buttoncomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\buttonmanager.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\collisioncomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\component.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\fallingcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\font.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\fpscomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\gameobject.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\healthcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\inputmanager.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\locator.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\logger.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\mapcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\miniginpch.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\movementcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\renderer.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\resourcemanager.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\scene.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\scenemanager.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\soundeffect.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\spritecomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\statemachine.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\textcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\texture2d.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\texturecomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\transformcomponent.obj
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.pch
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.pdb
-c:\users\wanne\desktop\engine\exam_assignment\x64\release\minigin.lib
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.command.1.tlog
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.read.1.tlog
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.write.1.tlog
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib-link.read.1.tlog
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib-link.write.1.tlog
-c:\users\wanne\desktop\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib.command.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.command.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.read.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\cl.write.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib-link.read.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib-link.write.1.tlog
+c:\users\wanne\desktop\dae lessons\year 2\semester 2\programming 4\engines\engine\exam_assignment\minigin\x64\release\minigin.tlog\lib.command.1.tlog

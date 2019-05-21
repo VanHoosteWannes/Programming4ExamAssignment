@@ -15,8 +15,8 @@ namespace dae {
 		AStarPathfinder();
 		~AStarPathfinder() = default;
 
-		std::vector<dae::Vector2> FindPath(std::shared_ptr<Node> pStartNode, std::shared_ptr<Node> pEndNode,Heuristics heuristicFunction);
-		void CalculateCosts(std::shared_ptr<Connection> pC, std::shared_ptr<Node> pStartNode, std::shared_ptr<Node> pTargetNode, Heuristics heuristicFunction);
+		static std::vector<dae::Vector2> FindPath(Node* pStartNode, Node* pEndNode,Heuristics heuristicFunction);
+		static void CalculateCosts(Connection* pC, Node* pStartNode, Node* pTargetNode, Heuristics heuristicFunction);
 	};
 }
 
