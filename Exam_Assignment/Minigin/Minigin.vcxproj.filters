@@ -34,9 +34,6 @@
     <ClInclude Include="MapComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -148,9 +145,6 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="MapComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">

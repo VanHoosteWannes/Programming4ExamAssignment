@@ -249,6 +249,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.dll" "$(OutputPath)"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Minigin\MovementComponent.h" />
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="DigDugActions.h" />
     <ClInclude Include="DigDugConditions.h" />
@@ -269,6 +270,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\x86\SDL2_mixer.dll" "$(OutputPath)"
     <ClInclude Include="VersusScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Minigin\MovementComponent.cpp" />
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="DigDugGhostComponent.cpp" />
     <ClCompile Include="DigDugHealthComponent.cpp" />

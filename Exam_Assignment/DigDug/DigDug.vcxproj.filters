@@ -70,6 +70,9 @@
     <ClInclude Include="PointsManager.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="..\Minigin\MovementComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DigDugHealthComponent.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="PointsManager.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Minigin\MovementComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

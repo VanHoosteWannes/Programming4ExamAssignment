@@ -213,7 +213,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MapComponent.h" />
     <ClInclude Include="MiniginPCH.h" />
-    <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="FallingComponent..h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Observer.h" />
@@ -254,7 +253,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_ttf\lib\x64\*.dll" "$(OutputPath)" /R /Y
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MiniginPCH.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="FallingComponent.cpp" />

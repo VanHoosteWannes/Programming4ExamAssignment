@@ -1,4 +1,4 @@
-#include "MiniginPCH.h"
+#include "pch.h"
 #include "MovementComponent.h"
 #include "TransformComponent.h"
 #include "SpriteComponent.h"
